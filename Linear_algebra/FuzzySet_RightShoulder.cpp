@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "FuzzySet_RightShoulder.h"
 #include "utils.h"
 
