@@ -59,3 +59,30 @@ void Path::render(SDL_Renderer* gRenderer) const
 		oldWaypoint = waypoint;
 	}
 }
+
+void Path::smoothPath(smoothingMethod method) {
+	//start at first node
+	Vector2D curr = _wayPoints.front();
+	int current = 0;
+
+	//switch for smoothing method
+	switch (method) {
+	case Rough:
+		//while path from current to 'next' is unobstructed
+		//loop from current to end of the list
+		//update 'next'
+
+		//repeat until current is end of the list
+
+		for (std::list<Vector2D>::iterator iter = std::next(_wayPoints.begin(), current); iter != _wayPoints.end(); ++iter){
+			//if path from curr to iter is unobstructed, proceed
+			//else, path[curr + 1] = previous
+		}
+	case Precise:
+		//start loop at end of list
+		//loop backwards until an unobstructed path is found
+		//update current
+		
+		//repeat until current is last
+	}
+}
