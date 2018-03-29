@@ -17,6 +17,7 @@ public:
 	void addNode(Node* node);
 	void render(SDL_Renderer* gRenderer);
 	void setNodes(std::vector<Node*>& nodeVector);
+	inline Vector2D getNode(int index) { return _nodeVector[index]->getPosition(); }
 };
 
 #endif

@@ -22,7 +22,7 @@ SDL_Window* gWindow = nullptr;
 SDL_Renderer* gRenderer = nullptr;
 //SDL_Texture* gTexture = nullptr;
 
-Environment environment;
+Environment* environment;
 Vehicle* vehicle;
 Vehicle* vehicleAlpha;
 
@@ -121,6 +121,8 @@ int wmain(int argc, char* args[])
 
 	std::cout << "test123" << std::endl;
 
+	environment = Environment::GetInstance();
+
 	int xOffset = 200;
 	int yOffset = 200;
 
@@ -173,11 +175,31 @@ int wmain(int argc, char* args[])
 
 	graph.setNodes(nodeVector);
 
-
+	Obstacle obstacle;
+	obstacle.setPosition(Vector2D(400, 300));
+	environment->addObstacle(&obstacle);
 
 //	GraphSearch* graphSearch = new DepthFirstGraphSearch(nodeVector[0], nodeVector[nodeVector.size() - 1]);
 	GraphSearch* graphSearch = new AStarGraphSearch(nodeVector[0], nodeVector[nodeVector.size() - 1]);
 	Path* foundPath = graph.findPath(graphSearch);
+
+	Path* secondPath = new Path(false);
+	secondPath->addWaypoint(graph.getNode(65));
+	secondPath->addWaypoint(graph.getNode(54));
+	secondPath->addWaypoint(graph.getNode(44));
+	secondPath->addWaypoint(graph.getNode(34));
+	secondPath->addWaypoint(graph.getNode(24));
+	secondPath->addWaypoint(graph.getNode(15));
+	secondPath->addWaypoint(graph.getNode(16));
+	secondPath->addWaypoint(graph.getNode(17));
+	secondPath->addWaypoint(graph.getNode(18));
+	secondPath->addWaypoint(graph.getNode(29));
+	secondPath->addWaypoint(graph.getNode(39));
+	secondPath->addWaypoint(graph.getNode(49));
+	secondPath->addWaypoint(graph.getNode(59));
+
+	auto roughPath = secondPath->smoothPath(Path::Rough);
+	auto precisePath = secondPath->smoothPath(Path::Precise);
 
 	Wall wallTop;
 	wallTop.setPosition(Vector2D(100, 20));
@@ -219,19 +241,17 @@ int wmain(int argc, char* args[])
 	wallTopLeft.setWallEnd(Vector2D(100, 20));
 	wallTopLeft.calculateNormals();
 
-	environment.addWall(&wallTop);
-	environment.addWall(&wallTopRight);
-	environment.addWall(&wallRight);
-	environment.addWall(&wallBottomRight);
-	environment.addWall(&wallBottom);
-	environment.addWall(&wallBottomLeft);
-	environment.addWall(&wallLeft);
-	environment.addWall(&wallTopLeft);
+	environment->addWall(&wallTop);
+	environment->addWall(&wallTopRight);
+	environment->addWall(&wallRight);
+	environment->addWall(&wallBottomRight);
+	environment->addWall(&wallBottom);
+	environment->addWall(&wallBottomLeft);
+	environment->addWall(&wallLeft);
+	environment->addWall(&wallTopLeft);
 
 
 
-	Obstacle obstacle;
-	obstacle.setPosition(Vector2D(400, 300));
 //	Obstacle obstacle2;
 //	obstacle2.setPosition(Vector2D(150, 150));
 //	Obstacle obstacle3;
@@ -241,7 +261,10 @@ int wmain(int argc, char* args[])
 //	Obstacle obstacle5;
 //	obstacle5.setPosition(Vector2D(650, 450));
 
-	environment.addObstacle(&obstacle);
+
+	Vector2D start(350, 380);
+	Vector2D end(320,350);
+	std::cout << environment->isPathObstructed(start, end) << std::endl;
 //	environment.addObstacle(&obstacle2);
 //	environment.addObstacle(&obstacle3);
 //	environment.addObstacle(&obstacle4);
@@ -249,7 +272,7 @@ int wmain(int argc, char* args[])
 
 
 
-	vehicle = new Vehicle(&environment, gRenderer);
+	vehicle = new Vehicle(environment, gRenderer);
 	vehicle->setPosition(Vector2D(400, 200));
 	vehicle->setScale(Vector2D(2.0f, 2.0f));
 	vehicle->setMaximumSpeed(100);
@@ -258,32 +281,33 @@ int wmain(int argc, char* args[])
 	vehicle->getSteering()->setObjectAdvoidanceActive(1.0f);
 	vehicle->getSteering()->setWallAvoidanceActive(50.0f);
 	vehicle->getSteering()->setWanderActive(0.4f);
-	environment.addVehicle(vehicle);
+	environment->addVehicle(vehicle);
 
-	vehicleAlpha = new Vehicle(&environment, gRenderer);
+	vehicleAlpha = new Vehicle(environment, gRenderer);
 	vehicleAlpha->setPosition(Vector2D(600, 100));
 	vehicleAlpha->setMaximumSpeed(100);
 	vehicleAlpha->setMaximumForce(50.0);
 	vehicleAlpha->setBoundingRadius(10);
-	vehicleAlpha->getSteering()->setObjectAdvoidanceActive(1.0f);
-	vehicleAlpha->getSteering()->setWallAvoidanceActive(1.0f);
+//	vehicleAlpha->getSteering()->setObjectAdvoidanceActive(1.0f);
+	vehicleAlpha->getSteering()->setWallAvoidanceActive(50.0f);
+	vehicleAlpha->getSteering()->setExploreActive(Vector2D(200, 200), 1.0f);
 //	vehicleAlpha->getSteering()->setHideActive(vehicle, 0.6f);
-	environment.addVehicle(vehicleAlpha);
+	environment->addVehicle(vehicleAlpha);
 
 //	vehicleAlpha.getSteering()->setOffsetPursuitActive(&vehicle, Vector2D(25.0f, 40.0f));
 
-	Path path = Path(true);
-	path.addWaypoint(Vector2D(100, 100));
-	path.addWaypoint(Vector2D(700, 100));
-	path.addWaypoint(Vector2D(100, 500));
-	path.addWaypoint(Vector2D(700, 500));
-	path.begin();
+//	Path path = Path(true);
+//	path.addWaypoint(Vector2D(100, 100));
+//	path.addWaypoint(Vector2D(700, 100));
+//	path.addWaypoint(Vector2D(100, 500));
+//	path.addWaypoint(Vector2D(700, 500));
+//	path.begin();
 //
-	vehicleAlpha->getSteering()->setPathFollowingActive(&path, 1.0f);
+//	vehicleAlpha->getSteering()->setPathFollowingActive(&path, 1.0f);
 
 	for(int i = 0; i < 100; ++i)
 	{
-		Vehicle* smallVehicle = new Vehicle(&environment, gRenderer);
+		Vehicle* smallVehicle = new Vehicle(environment, gRenderer);
 		smallVehicle->setPosition(Vector2D(30 + rand() % 740 , 30 + rand() % 540));
 		smallVehicle->setScale(Vector2D(0.5f, 0.5f));
 		smallVehicle->setMaximumSpeed(100);
@@ -297,7 +321,7 @@ int wmain(int argc, char* args[])
 		smallVehicle->getSteering()->setSeperationActive(50.0f);
 		smallVehicle->getSteering()->setAlignmentActive(0.4f);
 		smallVehicle->getSteering()->setCohesionActive(0.4f);
-		environment.addVehicle(smallVehicle);
+		environment->addVehicle(smallVehicle);
 	}
 
 //	vehicleAlpha.getSteering()->setTargetAgentAlpha();
@@ -336,7 +360,7 @@ int wmain(int argc, char* args[])
 		/*
 		 * Obstacles
 		 */
-		const std::vector<Obstacle*> obstacles = environment.getObstacles();
+		const std::vector<Obstacle*> obstacles = environment->getObstacles();
 		for(int i = 0, il = obstacles.size(); i < il; ++i)
 		{
 			obstacles[i]->render(gRenderer);
@@ -345,7 +369,7 @@ int wmain(int argc, char* args[])
 		/*
 		 * Walls
 		 */
-		const std::vector<Wall*> walls = environment.getWalls();
+		const std::vector<Wall*> walls = environment->getWalls();
 		for (int i = 0, il = walls.size(); i < il; ++i)
 		{
 			walls[i]->render(gRenderer);
@@ -366,7 +390,7 @@ int wmain(int argc, char* args[])
 		/*
 		 * Wandering vehicles
 		 */
-		const std::vector<Vehicle*>& vehicles = environment.getVehicles();
+		const std::vector<Vehicle*>& vehicles = environment->getVehicles();
 		for (int i = 0, il = vehicles.size(); i < il; ++i)
 		{
 			vehicles[i]->update(static_cast<float>(delta) / 1000);
@@ -386,7 +410,9 @@ int wmain(int argc, char* args[])
 		/*
 		 * Draw found path
 		 */
-		foundPath->render(gRenderer);
+		//foundPath->render(gRenderer);
+		precisePath->render(gRenderer);
+		roughPath->render(gRenderer);
 
 		SDL_RenderPresent(gRenderer);
 		SDL_GL_SwapWindow(gWindow);

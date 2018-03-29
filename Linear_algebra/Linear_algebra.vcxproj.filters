@@ -242,5 +242,11 @@
     <ClInclude Include="FzSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+>>>>>>> b6ef8d8ef4da19e7516b78530c1abae6dab62c59
   </ItemGroup>
 </Project>

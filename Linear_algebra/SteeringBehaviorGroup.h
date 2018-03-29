@@ -31,6 +31,7 @@ private:
 	bool _separationActive = false;
 	bool _alignmentActive = false;
 	bool _cohesionActive = false;
+	bool _exploreActive = false;
 
 	float _seekMult = 1.0f;
 	float _fleeMult = 1.0f;
@@ -47,6 +48,10 @@ private:
 	float _separationMult = 1.0f;
 	float _alignmentMult = 1.0f;
 	float _cohesionMult = 1.0f;
+	float _exploreMult = 1.0f;
+
+	float _exploreRadius = 0.0f;
+	float _exploreIncement = 0.05f;
 
 	double _wanderRadius	= 200;
 	double _wanderDistance	= 250;
@@ -54,7 +59,7 @@ private:
 	double _wanderAngle		= 0.0;
 
 	double _boxLength		= 0.0;
-	double _boxMinLength	= 100.0;
+	double _boxMinLength	= 50.0;
 	double _wallDetectionLength = 100.0;
 
 	Vehicle* _vehicle = nullptr;
@@ -79,7 +84,6 @@ private:
 	Vector2D evade(const Vehicle* target);
 	Vector2D wander();
 	Vector2D obstacleAvoidance(const std::vector<Obstacle*>& obstacles);
-	std::array<Vector2D, 3> createRays();
 	Vector2D wallAvoidance(std::vector<Wall*> walls);
 	Vector2D interpose(const Vehicle* targetAlpha, const Vehicle* targetBeta);
 	Vector2D seperation(const std::list<Vehicle*>& neighbours);
@@ -87,6 +91,7 @@ private:
 	Vector2D cohesion(const std::list<Vehicle*>& neighbours);
 	bool accumulateForce(Vector2D& totalForce, const Vector2D& addedForce);
 	Vector2D hide(const Vehicle* target, const std::vector<Obstacle*>& obstacles);
+	Vector2D explore(const Vector2D& target);
 	Vector2D followPath(Path* path, const double& distance);
 public:
 	SteeringBehaviorGroup(Vehicle* vehicle, SDL_Renderer* renderer);
@@ -97,7 +102,6 @@ public:
 	Vector2D calculateWTRSwP();
 	Vector2D getForwardComponent();
 	Vector2D getSideComponent();
-	void setPath();
 	void setTarget(Vector2D target);
 	void setTargetAgentAlpha(Vehicle* target);
 	void setTargetAgentBeta(Vehicle* target);
@@ -113,6 +117,7 @@ public:
 	void setSeperationActive(float priority);
 	void setAlignmentActive(float priority);
 	void setCohesionActive(float priority);
+	void setExploreActive(Vector2D target, float priority);
 	void setObjectAdvoidanceActive(float priority);
 	void setWallAvoidanceActive(float priority);
 	void setHideActive(Vehicle* vehicle, float priority);

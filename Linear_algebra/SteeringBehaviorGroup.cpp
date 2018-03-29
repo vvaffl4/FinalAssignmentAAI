@@ -214,6 +214,31 @@ Vector2D SteeringBehaviorGroup::hide(const Vehicle* target, const std::vector<Ob
 	return arrive(bestHidingSpot, 3);
 }
 
+Vector2D SteeringBehaviorGroup::explore(const Vector2D& target)
+{
+	_exploreRadius += _exploreIncement;
+	const Vector2D offset = Vector2D(
+		sin(_exploreRadius * 0.3),
+		cos(_exploreRadius * 0.3));
+
+	Vector2D point = target + Vector2D::normalize(offset) * _exploreRadius;
+
+//	SDL_SetRenderDrawColor(
+//		_renderer,
+//		255,
+//		0,
+//		0,
+//		255
+//	);
+//	SDL_RenderDrawPoint(
+//		_renderer,
+//		point.x,
+//		point.y
+//	);
+
+	return arrive(point, 3);
+}
+
 Vector2D SteeringBehaviorGroup::followPath(Path* path, const double& distance)
 {
 	if (Vector2D::distanceSqrt(path->getCurrentWaypoint(), _vehicle->getPosition()) < distance)
@@ -528,6 +553,13 @@ Vector2D SteeringBehaviorGroup::calculateWTRSwP()
 		if (!accumulateForce(accumulatedForce, groupForce))
 			return accumulatedForce;
 	}
+	if(_exploreActive)
+	{
+		force = explore(_target) * _exploreMult;
+
+		if (!accumulateForce(accumulatedForce, force))
+			return accumulatedForce;
+	}
 	if (_seekActive)
 	{
 		force = seek(_target) * _seekMult;
@@ -603,10 +635,6 @@ Vector2D SteeringBehaviorGroup::getForwardComponent()
 Vector2D SteeringBehaviorGroup::getSideComponent()
 {
 	return _vehicle->getSide();
-}
-
-void SteeringBehaviorGroup::setPath()
-{
 }
 
 void SteeringBehaviorGroup::setTarget(Vector2D target)
@@ -723,4 +751,11 @@ void SteeringBehaviorGroup::setCohesionActive(float priority)
 {
 	_cohesionActive = true;
 	_cohesionMult = priority;
+}
+
+void SteeringBehaviorGroup::setExploreActive(Vector2D target, float priority)
+{
+	_target = target;
+	_exploreActive = true;
+	_exploreMult = priority;
 }
