@@ -288,21 +288,22 @@ int wmain(int argc, char* args[])
 	vehicleAlpha->setMaximumSpeed(100);
 	vehicleAlpha->setMaximumForce(50.0);
 	vehicleAlpha->setBoundingRadius(10);
-	vehicleAlpha->getSteering()->setObjectAdvoidanceActive(1.0f);
-	vehicleAlpha->getSteering()->setWallAvoidanceActive(1.0f);
+//	vehicleAlpha->getSteering()->setObjectAdvoidanceActive(1.0f);
+	vehicleAlpha->getSteering()->setWallAvoidanceActive(50.0f);
+	vehicleAlpha->getSteering()->setExploreActive(Vector2D(200, 200), 1.0f);
 //	vehicleAlpha->getSteering()->setHideActive(vehicle, 0.6f);
 	environment->addVehicle(vehicleAlpha);
 
 //	vehicleAlpha.getSteering()->setOffsetPursuitActive(&vehicle, Vector2D(25.0f, 40.0f));
 
-	Path path = Path(true);
-	path.addWaypoint(Vector2D(100, 100));
-	path.addWaypoint(Vector2D(700, 100));
-	path.addWaypoint(Vector2D(100, 500));
-	path.addWaypoint(Vector2D(700, 500));
-	path.begin();
+//	Path path = Path(true);
+//	path.addWaypoint(Vector2D(100, 100));
+//	path.addWaypoint(Vector2D(700, 100));
+//	path.addWaypoint(Vector2D(100, 500));
+//	path.addWaypoint(Vector2D(700, 500));
+//	path.begin();
 //
-	vehicleAlpha->getSteering()->setPathFollowingActive(&path, 1.0f);
+//	vehicleAlpha->getSteering()->setPathFollowingActive(&path, 1.0f);
 
 	for(int i = 0; i < 100; ++i)
 	{
