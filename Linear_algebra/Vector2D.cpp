@@ -206,6 +206,16 @@ Vector2D& Vector2D::operator/=(const double& other)
 	return *this;
 }
 
+bool Vector2D::operator!=(const Vector2D & other)
+{
+	return ((other.x != x) || (other.y != y));
+}
+
+bool Vector2D::operator==(const Vector2D & other)
+{
+	return ((other.x == x) && (other.y == y));
+}
+
 float Vector2D::toRadians() const
 {
 	return std::atan2(y, x);

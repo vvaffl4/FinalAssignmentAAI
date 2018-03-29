@@ -11,17 +11,17 @@ private:
 	bool _repeat = false;
 	std::list<Vector2D>::const_iterator _currentWaypoint;
 	std::list<Vector2D> _wayPoints;
-	enum smoothingMethod{Rough, Precise};
 public:
 	Path(bool repeat);
 	~Path();
+	enum smoothingMethod{Rough, Precise};
 	void gotoNextWaypoint();
 	void addWaypoint(const Vector2D& waypoint);
 	const Vector2D& getCurrentWaypoint() const;
 	void begin();
 	bool finished() const;
 	void render(SDL_Renderer* gRenderer) const;
-	void smoothPath(smoothingMethod method);
+	Path* smoothPath(smoothingMethod method);
 };
 
 #endif

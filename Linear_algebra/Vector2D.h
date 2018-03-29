@@ -43,6 +43,8 @@ public:
 	Vector2D& operator*=(const Vector2D &other);
 	Vector2D& operator/=(const Vector2D &other);
 	Vector2D& operator/=(const double& other);
+	bool operator!=(const Vector2D& other);
+	bool operator==(const Vector2D& other);
 	float toRadians() const;
 	static Vector2D normalize(const Vector2D& vector);
 	static float distance(const Vector2D& source, const Vector2D& target);

@@ -1,4 +1,5 @@
 #include "Path.h"
+#include "Environment.h"
 
 Path::Path(bool repeat) :
 	_repeat(repeat)
@@ -60,29 +61,49 @@ void Path::render(SDL_Renderer* gRenderer) const
 	}
 }
 
-void Path::smoothPath(smoothingMethod method) {
+Path* Path::smoothPath(smoothingMethod method)
+{
 	//start at first node
 	Vector2D curr = _wayPoints.front();
 	int current = 0;
+	Environment* env = Environment::GetInstance();
+
+	Path* newPath = new Path(false);
+	newPath->addWaypoint(curr);
 
 	//switch for smoothing method
-	switch (method) {
+	Vector2D prev = curr;
+	switch (method) 
+	{
 	case Rough:
-		//while path from current to 'next' is unobstructed
-		//loop from current to end of the list
-		//update 'next'
+		//start at current
+		//step forward until path is obstructed
+		//previously visited node comes after current
+		//update current
+		//repeat until we reach the last node
 
-		//repeat until current is end of the list
-
-		for (std::list<Vector2D>::iterator iter = std::next(_wayPoints.begin(), current); iter != _wayPoints.end(); ++iter){
-			//if path from curr to iter is unobstructed, proceed
-			//else, path[curr + 1] = previous
+		while (curr != _wayPoints.back()) {
+			for (std::list<Vector2D>::iterator iter = std::next(_wayPoints.begin(), current); iter != _wayPoints.end(); ++iter) {
+				if (env->isPathObstructed(curr, (*iter))) {
+					//if path to current node is obstructed, we can't update the path to here
+					break;
+				}
+				//keep track of previously visited node
+				prev = (*iter);
+				current++;
+			}
+			//update new path to include previously visited point
+			newPath->addWaypoint(prev);
+			curr = prev;
 		}
-	case Precise:
+
+	//case Precise:
 		//start loop at end of list
 		//loop backwards until an unobstructed path is found
 		//update current
 		
 		//repeat until current is last
 	}
+
+	return newPath;
 }
