@@ -64,7 +64,7 @@ Path* AStarGraphSearch::searchGraph()
 
 				priorityQueue.push_back((*currentEdge)->getTarget());
 			}
-			else if(realCost < realCostToNode[toIndex] && !visited(nodesVisitedMap, toIndex))
+			else if(realCost < realCostToNode[toIndex] && visited(nodesVisitedMap, toIndex))
 			{
 				_totalCostToNode[toIndex]	= realCost + heuristicCost;
 				realCostToNode[toIndex]		= realCost;

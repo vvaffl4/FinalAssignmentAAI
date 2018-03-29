@@ -134,53 +134,57 @@ int wmain(int argc, char* args[])
 
 	Guard guard = Guard();
 	Graph graph = Graph();
-
-	int xPositionOld = 0;
-	int yPositionOld = 0;
-
-	std::vector<Node*> nodeVector;
-
-	for(int yPosition = 0; yPosition < xCount; ++yPosition)
-	{
-		for (int xPosition = 0; xPosition < yCount; ++xPosition)
-		{
-			Node* node = new Node(Vector2D(xOffset + xPosition * xSize, yOffset + yPosition * ySize));
-			node->setIndex(nodeVector.size());
-			nodeVector.push_back(node);
-
-			if (xPosition > xPositionOld)
-			{
-				int xIndex = yPosition * xCount + xPositionOld;
-				Node* xPreviousNode = nodeVector[xIndex];
-
-				Edge* edge = new TwoSidedEdge(xPreviousNode, node, 1.0f);
-				xPreviousNode->addEdge(edge);
-				node->addEdge(edge);
-			}
-			if (yPosition > yPositionOld)
-			{
-				int yIndex = yPositionOld * yCount + xPosition;
-				Node* yPreviousNode = nodeVector[yIndex];
-
-				Edge* edge = new TwoSidedEdge(yPreviousNode, node, 1.0f);
-				yPreviousNode->addEdge(edge);
-				node->addEdge(edge);
-			}
-
-			xPositionOld = xPosition;
-		}
-
-		yPositionOld = yPosition;
-	}
-
-	graph.setNodes(nodeVector);
+	graph.generateGraph();
+//	int xPositionOld = 0;
+//	int yPositionOld = 0;
+//
+//	std::vector<Node*> nodeVector;
+//
+//	for(int yPosition = 0; yPosition < xCount; ++yPosition)
+//	{
+//		for (int xPosition = 0; xPosition < yCount; ++xPosition)
+//		{
+//			Node* node = new Node(Vector2D(xOffset + xPosition * xSize, yOffset + yPosition * ySize));
+//			node->setIndex(nodeVector.size());
+//			nodeVector.push_back(node);
+//
+//			if (xPosition > xPositionOld)
+//			{
+//				int xIndex = yPosition * xCount + xPositionOld;
+//				Node* xPreviousNode = nodeVector[xIndex];
+//
+//				Edge* edge = new TwoSidedEdge(xPreviousNode, node, 1.0f);
+//				Edge* edgeBack = new TwoSidedEdge(node, xPreviousNode, 1.0f);
+//				xPreviousNode->addEdge(edge);
+////				node->addEdge(edge;
+//				node->addEdge(edgeBack);
+//			}
+//			if (yPosition > yPositionOld)
+//			{
+//				int yIndex = yPositionOld * yCount + xPosition;
+//				Node* yPreviousNode = nodeVector[yIndex];
+//
+//				Edge* edge = new TwoSidedEdge(yPreviousNode, node, 1.0f);
+//				Edge* edgeBack = new TwoSidedEdge(node, yPreviousNode, 1.0f);
+//				yPreviousNode->addEdge(edge);
+////				node->addEdge(edge);
+//				node->addEdge(edgeBack);
+//			}
+//
+//			xPositionOld = xPosition;
+//		}
+//
+//		yPositionOld = yPosition;
+//	}
+//
+//	graph.setNodes(nodeVector);
 
 	Obstacle obstacle;
 	obstacle.setPosition(Vector2D(400, 300));
 	environment->addObstacle(&obstacle);
 
 //	GraphSearch* graphSearch = new DepthFirstGraphSearch(nodeVector[0], nodeVector[nodeVector.size() - 1]);
-	GraphSearch* graphSearch = new AStarGraphSearch(nodeVector[0], nodeVector[nodeVector.size() - 1]);
+	GraphSearch* graphSearch = new AStarGraphSearch(graph.getNodes()[20], graph.getNodes()[0]);
 	Path* foundPath = graph.findPath(graphSearch);
 
 	Path* secondPath = new Path(false);
@@ -410,7 +414,7 @@ int wmain(int argc, char* args[])
 		/*
 		 * Draw found path
 		 */
-		//foundPath->render(gRenderer);
+		foundPath->render(gRenderer);
 		precisePath->render(gRenderer);
 		roughPath->render(gRenderer);
 

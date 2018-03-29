@@ -1,252 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="AStarGraphSearch.cpp" />
+    <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="BaseEntity.cpp" />
+    <ClCompile Include="DepthFirstGraphSearch.cpp" />
+    <ClCompile Include="Edge.cpp" />
+    <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="FuzzyLogic.cpp" />
+    <ClCompile Include="FuzzyModule.cpp" />
+    <ClCompile Include="FuzzyOperators.cpp" />
+    <ClCompile Include="FuzzyRule.cpp" />
+    <ClCompile Include="FuzzySet.cpp" />
+    <ClCompile Include="FuzzySet_LeftShoulder.cpp" />
+    <ClCompile Include="FuzzySet_RightShoulder.cpp" />
+    <ClCompile Include="FuzzySet_Singleton.cpp" />
+    <ClCompile Include="FuzzySet_Triangle.cpp" />
+    <ClCompile Include="FuzzyTerm.cpp" />
+    <ClCompile Include="FuzzyVariable.cpp" />
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="GraphSearch.cpp" />
+    <ClCompile Include="GraphSearchHeuristic.cpp" />
+    <ClCompile Include="Hide.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="MovingEntity.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Guard.cpp" />
+    <ClCompile Include="OneSidedEdge.cpp" />
+    <ClCompile Include="Path.cpp" />
+    <ClCompile Include="Patrol.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="SteeringBehaviorGroup.cpp" />
+    <ClCompile Include="TwoSidedEdge.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Vector3D.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="CompositeGoal.cpp" />
+    <ClCompile Include="Telegram.cpp" />
+    <ClCompile Include="AtomicGoal.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MovingEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SteeringBehaviorGroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vehicle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Environment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Obstacle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Guard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Patrol.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hide.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Attack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Path.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Edge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Graph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TwoSidedEdge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OneSidedEdge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphSearch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DepthFirstGraphSearch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AStarGraphSearch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphSearchHeuristic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzyLogic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzyModule.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzyOperators.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzyRule.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzySet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzySet_LeftShoulder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzySet_RightShoulder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzySet_Singleton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzySet_Triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzyTerm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FuzzyVariable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Matrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MovingEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SteeringBehaviorGroup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vehicle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Environment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obstacle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Guard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Patrol.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hide.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Attack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Path.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Edge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Graph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TwoSidedEdge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OneSidedEdge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphSearch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DepthFirstGraphSearch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AStarGraphSearch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphSearchHeuristic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzyModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzyOperators.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzyRule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzySet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzySet_LeftShoulder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzySet_RightShoulder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzySet_Singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzySet_Triangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzyTerm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FuzzyVariable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FzSet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-=======
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
->>>>>>> b6ef8d8ef4da19e7516b78530c1abae6dab62c59
+    <ClInclude Include="AStarGraphSearch.h" />
+    <ClInclude Include="Attack.h" />
+    <ClInclude Include="BaseEntity.h" />
+    <ClInclude Include="DepthFirstGraphSearch.h" />
+    <ClInclude Include="Edge.h" />
+    <ClInclude Include="Environment.h" />
+    <ClInclude Include="FuzzyModule.h" />
+    <ClInclude Include="FuzzyOperators.h" />
+    <ClInclude Include="FuzzyRule.h" />
+    <ClInclude Include="FuzzySet.h" />
+    <ClInclude Include="FuzzySet_LeftShoulder.h" />
+    <ClInclude Include="FuzzySet_RightShoulder.h" />
+    <ClInclude Include="FuzzySet_Singleton.h" />
+    <ClInclude Include="FuzzySet_Triangle.h" />
+    <ClInclude Include="FuzzyTerm.h" />
+    <ClInclude Include="FuzzyVariable.h" />
+    <ClInclude Include="FzSet.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="GraphSearch.h" />
+    <ClInclude Include="GraphSearchHeuristic.h" />
+    <ClInclude Include="Hide.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="MovingEntity.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Guard.h" />
+    <ClInclude Include="OneSidedEdge.h" />
+    <ClInclude Include="Path.h" />
+    <ClInclude Include="Patrol.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="SteeringBehaviorGroup.h" />
+    <ClInclude Include="TwoSidedEdge.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="Wall.h" />
+    <ClInclude Include="Goal.h" />
+    <ClInclude Include="CompositeGoal.h" />
+    <ClInclude Include="Telegram.h" />
+    <ClInclude Include="AtomicGoal.h" />
   </ItemGroup>
 </Project>
