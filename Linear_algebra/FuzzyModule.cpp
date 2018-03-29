@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "FuzzyModule.h"
 #include "FuzzyTerm.h"
 #include "FuzzyRule.h"

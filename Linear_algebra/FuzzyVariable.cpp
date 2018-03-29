@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "FuzzyVariable.h"
 #include <assert.h>
 #include "FuzzySet_Triangle.h"
