@@ -42,11 +42,14 @@ void Graph::floodfill(int x, int y, Node* previous)
 	{
 		Node* node = (*nodeIt);
 
-		if(node->getPosition().x == _startX + x * _offsetX  &&
-			node->getPosition().y == _startY + y * _offsetY)
+		if(node->getPosition().x == _startX + (x * _offsetX)  &&
+			node->getPosition().y == _startY + (y * _offsetY))
 		{
 			Edge* edgeForth = new TwoSidedEdge(node, previous, 1.0f);
 			Edge* edgeBack = new TwoSidedEdge(previous, node, 1.0f);
+
+			previous->addEdge(edgeBack);
+			node->addEdge(edgeForth);
 
 			return;
 		}
@@ -58,7 +61,16 @@ void Graph::floodfill(int x, int y, Node* previous)
 	node->setIndex(_nodeVector.size());
 	_nodeVector.push_back(node);
 
-	if (x > 10 || x < -10 || y > 10 || y < -10)
+	if(previous != nullptr)
+	{
+		Edge* edgeForth = new TwoSidedEdge(node, previous, 1.0f);
+		Edge* edgeBack = new TwoSidedEdge(previous, node, 1.0f);
+
+		node->addEdge(edgeForth);
+		previous->addEdge(edgeBack);
+	}
+
+	if (x > 3 || x < -3 || y > 3 || y < -3)
 		return;
 
 	floodfill(x, y + 1, node);
