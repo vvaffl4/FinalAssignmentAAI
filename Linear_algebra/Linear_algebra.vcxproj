@@ -202,6 +202,7 @@
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="SteeringBehaviorGroup.h" />
     <ClInclude Include="TwoSidedEdge.h" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vehicle.h" />

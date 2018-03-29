@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "FuzzySet_Triangle.h"
 #include "utils.h"
 
