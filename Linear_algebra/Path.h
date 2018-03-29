@@ -14,12 +14,14 @@ private:
 public:
 	Path(bool repeat);
 	~Path();
+	enum smoothingMethod{Rough, Precise};
 	void gotoNextWaypoint();
 	void addWaypoint(const Vector2D& waypoint);
 	const Vector2D& getCurrentWaypoint() const;
 	void begin();
 	bool finished() const;
 	void render(SDL_Renderer* gRenderer) const;
+	Path* smoothPath(smoothingMethod method);
 };
 
 #endif
