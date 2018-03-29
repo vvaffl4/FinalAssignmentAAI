@@ -198,7 +198,8 @@ int wmain(int argc, char* args[])
 	secondPath->addWaypoint(graph.getNode(49));
 	secondPath->addWaypoint(graph.getNode(59));
 
-	secondPath = secondPath->smoothPath(Path::Rough);
+	auto roughPath = secondPath->smoothPath(Path::Rough);
+	auto precisePath = secondPath->smoothPath(Path::Precise);
 
 	Wall wallTop;
 	wallTop.setPosition(Vector2D(100, 20));
@@ -409,7 +410,8 @@ int wmain(int argc, char* args[])
 		 * Draw found path
 		 */
 		//foundPath->render(gRenderer);
-		secondPath->render(gRenderer);
+		precisePath->render(gRenderer);
+		roughPath->render(gRenderer);
 
 		SDL_RenderPresent(gRenderer);
 		SDL_GL_SwapWindow(gWindow);

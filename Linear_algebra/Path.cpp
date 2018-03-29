@@ -72,7 +72,7 @@ Path* Path::smoothPath(smoothingMethod method)
 	newPath->addWaypoint(curr);
 
 	//switch for smoothing method
-	Vector2D prev = curr;
+	Vector2D prev;
 	switch (method) 
 	{
 	case Rough:
@@ -81,7 +81,7 @@ Path* Path::smoothPath(smoothingMethod method)
 		//previously visited node comes after current
 		//update current
 		//repeat until we reach the last node
-
+		prev = _wayPoints.front();
 		while (curr != _wayPoints.back()) {
 			for (std::list<Vector2D>::iterator iter = std::next(_wayPoints.begin(), current); iter != _wayPoints.end(); ++iter) {
 				if (env->isPathObstructed(curr, (*iter))) {
@@ -97,12 +97,30 @@ Path* Path::smoothPath(smoothingMethod method)
 			curr = prev;
 		}
 
-	//case Precise:
+	case Precise:
 		//start loop at end of list
 		//loop backwards until an unobstructed path is found
 		//update current
 		
 		//repeat until current is last
+		prev = _wayPoints.back();
+		while (curr != _wayPoints.back()) {
+			for (std::list<Vector2D>::reverse_iterator iter = _wayPoints.rbegin(); (*iter) != curr; ++iter) {
+				if (env->isPathObstructed(curr, (*iter)))
+				{
+					//continue
+				}
+				else
+				{
+					//add prev to newPath
+					newPath->addWaypoint(prev);
+					curr = prev;
+					break;
+				}
+				prev = (*iter);
+				current++;
+			}
+		}
 	}
 
 	return newPath;
