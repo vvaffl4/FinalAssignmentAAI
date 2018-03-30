@@ -35,12 +35,6 @@ Vector2D SteeringBehaviorGroup::pointToLocalSpace(const Vector2D& point, const V
 	double tX = -position.dotProduct(heading);
 	double tY = -position.dotProduct(side);
 
-//	Matrix matrix(
-//		heading.x,	side.x,	tX,
-//		heading.y,	side.y,	tY,
-//		0,			0,		1
-//	);
-
 	Matrix matrix(
 		heading.x,	heading.y,	tX,
 		side.x,		side.y,		tY,

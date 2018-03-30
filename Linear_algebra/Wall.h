@@ -12,6 +12,7 @@ private:
 public:
 	Wall();
 	~Wall();
+	bool intersectSimple(const Vector2D& position, const Vector2D& ray);
 	bool intersect(const Vector2D& position, const Vector2D& ray, double& distance, Vector2D& point);
 	void setWallEnd(const Vector2D& position);
 	void calculateNormals();

@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\User\Documents\Visual Studio 2017\Libraries\Includes;$(IncludePath);C:\Libraries\include</IncludePath>
-    <LibraryPath>D:\User\Documents\Visual Studio 2017\Libraries\Libs;$(LibraryPath);C:\Libraries\lib\x86</LibraryPath>
+    <IncludePath>D:\User\Documents\Visual Studio 2017\Libraries\Includes;$(IncludePath);C:\Libraries\include;C:\Users\pw\Documents\Visual Studio 2017\Libraries\include</IncludePath>
+    <LibraryPath>D:\User\Documents\Visual Studio 2017\Libraries\Libs;$(LibraryPath);C:\Libraries\lib\x86;C:\Users\pw\Documents\Visual Studio 2017\Libraries\lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\User\Documents\Visual Studio 2017\Libraries\Includes;$(IncludePath)</IncludePath>

@@ -22,7 +22,6 @@ SDL_Window* gWindow = nullptr;
 SDL_Renderer* gRenderer = nullptr;
 //SDL_Texture* gTexture = nullptr;
 
-Environment* environment;
 Vehicle* vehicle;
 Vehicle* vehicleAlpha;
 
@@ -119,91 +118,19 @@ int wmain(int argc, char* args[])
 	if( !init())
 		std::cout << "Failed to initialize" << std::endl;
 
-	std::cout << "test123" << std::endl;
-
-	environment = Environment::GetInstance();
-
-	int xOffset = 200;
-	int yOffset = 200;
-
-	int xSize = 30;
-	int ySize = 30;
-
-	int xCount = 10;
-	int yCount = 10;
-
 	Guard guard = Guard();
-	Graph graph = Graph();
-	graph.generateGraph();
-//	int xPositionOld = 0;
-//	int yPositionOld = 0;
-//
-//	std::vector<Node*> nodeVector;
-//
-//	for(int yPosition = 0; yPosition < xCount; ++yPosition)
-//	{
-//		for (int xPosition = 0; xPosition < yCount; ++xPosition)
-//		{
-//			Node* node = new Node(Vector2D(xOffset + xPosition * xSize, yOffset + yPosition * ySize));
-//			node->setIndex(nodeVector.size());
-//			nodeVector.push_back(node);
-//
-//			if (xPosition > xPositionOld)
-//			{
-//				int xIndex = yPosition * xCount + xPositionOld;
-//				Node* xPreviousNode = nodeVector[xIndex];
-//
-//				Edge* edge = new TwoSidedEdge(xPreviousNode, node, 1.0f);
-//				Edge* edgeBack = new TwoSidedEdge(node, xPreviousNode, 1.0f);
-//				xPreviousNode->addEdge(edge);
-////				node->addEdge(edge;
-//				node->addEdge(edgeBack);
-//			}
-//			if (yPosition > yPositionOld)
-//			{
-//				int yIndex = yPositionOld * yCount + xPosition;
-//				Node* yPreviousNode = nodeVector[yIndex];
-//
-//				Edge* edge = new TwoSidedEdge(yPreviousNode, node, 1.0f);
-//				Edge* edgeBack = new TwoSidedEdge(node, yPreviousNode, 1.0f);
-//				yPreviousNode->addEdge(edge);
-////				node->addEdge(edge);
-//				node->addEdge(edgeBack);
-//			}
-//
-//			xPositionOld = xPosition;
-//		}
-//
-//		yPositionOld = yPosition;
-//	}
-//
-//	graph.setNodes(nodeVector);
+
+
+	/*////////////////////////
+	* START SETUP ENVIRONMENT
+	*////////////////////////
+
+	Environment* environment = Environment::GetInstance();
 
 	Obstacle obstacle;
 	obstacle.setPosition(Vector2D(400, 300));
 	environment->addObstacle(&obstacle);
 
-//	GraphSearch* graphSearch = new DepthFirstGraphSearch(nodeVector[0], nodeVector[nodeVector.size() - 1]);
-	GraphSearch* graphSearch = new AStarGraphSearch(graph.getNodes()[20], graph.getNodes()[0]);
-	Path* foundPath = graph.findPath(graphSearch);
-
-	Path* secondPath = new Path(false);
-	secondPath->addWaypoint(graph.getNode(65));
-	secondPath->addWaypoint(graph.getNode(54));
-	secondPath->addWaypoint(graph.getNode(44));
-	secondPath->addWaypoint(graph.getNode(34));
-	secondPath->addWaypoint(graph.getNode(24));
-	secondPath->addWaypoint(graph.getNode(15));
-	secondPath->addWaypoint(graph.getNode(16));
-	secondPath->addWaypoint(graph.getNode(17));
-	secondPath->addWaypoint(graph.getNode(18));
-	secondPath->addWaypoint(graph.getNode(29));
-	secondPath->addWaypoint(graph.getNode(39));
-	secondPath->addWaypoint(graph.getNode(49));
-	secondPath->addWaypoint(graph.getNode(59));
-
-	auto roughPath = secondPath->smoothPath(Path::Rough);
-	auto precisePath = secondPath->smoothPath(Path::Precise);
 
 	Wall wallTop;
 	wallTop.setPosition(Vector2D(100, 20));
@@ -254,27 +181,45 @@ int wmain(int argc, char* args[])
 	environment->addWall(&wallLeft);
 	environment->addWall(&wallTopLeft);
 
+	 /*////////////////////////
+	 * START SETUP GRAPH
+	 *////////////////////////
+
+	Graph graph = Graph();
+	graph.generateGraph();
+
+//	GraphSearch* graphSearch = new DepthFirstGraphSearch(nodeVector[0], nodeVector[nodeVector.size() - 1]);
+	GraphSearch* graphSearch = new AStarGraphSearch(graph.getNodes()[graph.getNodes().size() - 1], graph.getNodes()[0]);
+	Path* foundPath = graph.findPath(graphSearch);
+
+//	Path* roughPath = foundPath->smoothPath(Path::Precise);
+
+//	Path* secondPath = new Path(false);
+//	secondPath->addWaypoint(graph.getNode(65));
+//	secondPath->addWaypoint(graph.getNode(54));
+//	secondPath->addWaypoint(graph.getNode(44));
+//	secondPath->addWaypoint(graph.getNode(34));
+//	secondPath->addWaypoint(graph.getNode(24));
+//	secondPath->addWaypoint(graph.getNode(15));
+//	secondPath->addWaypoint(graph.getNode(16));
+//	secondPath->addWaypoint(graph.getNode(17));
+//	secondPath->addWaypoint(graph.getNode(18));
+//	secondPath->addWaypoint(graph.getNode(29));
+//	secondPath->addWaypoint(graph.getNode(39));
+//	secondPath->addWaypoint(graph.getNode(49));
+//	secondPath->addWaypoint(graph.getNode(59));
+
+//	auto roughPath = secondPath->smoothPath(Path::Rough);
+//	auto precisePath = secondPath->smoothPath(Path::Precise);
+
+//	Vector2D start(350, 380);
+//	Vector2D end(320,350);
+//	std::cout << environment->isPathObstructed(start, end) << std::endl;
 
 
-//	Obstacle obstacle2;
-//	obstacle2.setPosition(Vector2D(150, 150));
-//	Obstacle obstacle3;
-//	obstacle3.setPosition(Vector2D(650, 150));
-//	Obstacle obstacle4;
-//	obstacle4.setPosition(Vector2D(150, 450));
-//	Obstacle obstacle5;
-//	obstacle5.setPosition(Vector2D(650, 450));
-
-
-	Vector2D start(350, 380);
-	Vector2D end(320,350);
-	std::cout << environment->isPathObstructed(start, end) << std::endl;
-//	environment.addObstacle(&obstacle2);
-//	environment.addObstacle(&obstacle3);
-//	environment.addObstacle(&obstacle4);
-//	environment.addObstacle(&obstacle5);
-
-
+   /*////////////////////////
+	* START SETUP VEHICLES
+	*////////////////////////
 
 	vehicle = new Vehicle(environment, gRenderer);
 	vehicle->setPosition(Vector2D(400, 200));
@@ -292,21 +237,10 @@ int wmain(int argc, char* args[])
 	vehicleAlpha->setMaximumSpeed(100);
 	vehicleAlpha->setMaximumForce(50.0);
 	vehicleAlpha->setBoundingRadius(10);
-//	vehicleAlpha->getSteering()->setObjectAdvoidanceActive(1.0f);
 	vehicleAlpha->getSteering()->setWallAvoidanceActive(50.0f);
 	vehicleAlpha->getSteering()->setExploreActive(Vector2D(200, 200), 1.0f);
-//	vehicleAlpha->getSteering()->setHideActive(vehicle, 0.6f);
 	environment->addVehicle(vehicleAlpha);
 
-//	vehicleAlpha.getSteering()->setOffsetPursuitActive(&vehicle, Vector2D(25.0f, 40.0f));
-
-//	Path path = Path(true);
-//	path.addWaypoint(Vector2D(100, 100));
-//	path.addWaypoint(Vector2D(700, 100));
-//	path.addWaypoint(Vector2D(100, 500));
-//	path.addWaypoint(Vector2D(700, 500));
-//	path.begin();
-//
 //	vehicleAlpha->getSteering()->setPathFollowingActive(&path, 1.0f);
 
 	for(int i = 0; i < 100; ++i)
@@ -328,9 +262,10 @@ int wmain(int argc, char* args[])
 		environment->addVehicle(smallVehicle);
 	}
 
-//	vehicleAlpha.getSteering()->setTargetAgentAlpha();
-//	vehicleAlpha.getSteering()->setTargetAgentBeta();
-//	vehicleAlpha.getSteering()->setInterposeActive(vehicles[0], vehicles[1]);
+
+	/*////////////////////////
+	* EVENT AND RENDER LOOP
+	*////////////////////////
 
 	SDL_Event gEvent;
 
@@ -338,7 +273,7 @@ int wmain(int argc, char* args[])
 	{
 		guard.update();
 
-		Uint32 now = SDL_GetTicks();
+		const Uint32 now = SDL_GetTicks();
 		if (now > last) 
 		{
 			delta = now - last;
@@ -380,18 +315,6 @@ int wmain(int argc, char* args[])
 		}
 
 		/*
-		 * Active vehicle
-		 */
-//		vehicle.update(static_cast<float>(delta) / 1000);
-//		vehicle.render(gRenderer);
-		
-		/*
-		 * Alpha vehicle
-		 */
-//		vehicleAlpha.update(static_cast<float>(delta) / 1000);
-//		vehicleAlpha.render(gRenderer);
-
-		/*
 		 * Wandering vehicles
 		 */
 		const std::vector<Vehicle*>& vehicles = environment->getVehicles();
@@ -415,8 +338,8 @@ int wmain(int argc, char* args[])
 		 * Draw found path
 		 */
 		foundPath->render(gRenderer);
-		precisePath->render(gRenderer);
-		roughPath->render(gRenderer);
+//		precisePath->render(gRenderer);
+//		roughPath->render(gRenderer);
 
 		SDL_RenderPresent(gRenderer);
 		SDL_GL_SwapWindow(gWindow);

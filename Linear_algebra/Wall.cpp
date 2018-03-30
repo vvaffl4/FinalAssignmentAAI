@@ -8,6 +8,27 @@ Wall::Wall()
 Wall::~Wall()
 {
 }
+bool Wall::intersectSimple(const Vector2D& position, const Vector2D& ray)
+{
+	Vector2D A = position;
+	Vector2D B = ray;
+	Vector2D C = _position;
+	Vector2D D = _position + _wallEnd;
+
+	double rTop = (A.y - C.y) * (D.x - C.x) - (A.x - C.x) * (D.y - C.y);
+	double rBot = (B.x - A.x) * (D.y - C.y) - (B.y - A.y) * (D.x - C.x);
+
+	double sTop = (A.y - C.y) * (B.x - A.x) - (A.x - C.x) * (B.y - A.y);
+	double sBot = (B.x - A.x) * (D.y - C.y) - (B.y - A.y) * (D.x - C.x);
+
+	if (rBot == 0 || sBot == 0)
+		return false;
+
+	double r = rTop / rBot;
+	double s = sTop / sBot;
+
+	return (r > 0 && r < 1 && s > 0 && s < 1);
+}
 
 bool Wall::intersect(const Vector2D& position, const Vector2D& ray, double& distance, Vector2D& point)
 {

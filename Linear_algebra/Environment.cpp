@@ -110,9 +110,19 @@ bool Environment::rayIntersectsObstacle(Vector2D start, Vector2D end, Obstacle* 
 
 bool Environment::isPathObstructed(Vector2D start, Vector2D end)
 {
-	for (auto iter = getObstacles().cbegin(); iter != getObstacles().cend(); iter++) {
+	for (auto iter = getObstacles().cbegin(); iter != getObstacles().cend(); ++iter) {
 		if (rayIntersectsObstacle(start, end, (*iter)))
 			return true;
 	}
 	return false;
 }
+
+bool Environment::isEdgeObstructed(Vector2D start, Vector2D end)
+{
+	for (auto iter = _walls.cbegin(); iter != _walls.cend(); ++iter) {
+		if ((*iter)->intersectSimple(start, end))
+			return true;
+	}
+	return false;
+}
+

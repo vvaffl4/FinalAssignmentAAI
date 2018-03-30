@@ -32,6 +32,7 @@ public:
 
 	bool rayIntersectsObstacle(Vector2D start, Vector2D end, Obstacle* obs);
 	bool isPathObstructed(Vector2D start, Vector2D end);
+	bool isEdgeObstructed(Vector2D start, Vector2D end);
 };
 
 

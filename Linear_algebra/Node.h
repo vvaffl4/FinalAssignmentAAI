@@ -16,7 +16,7 @@ public:
 	Node();
 	Node(const Vector2D& position);
 	~Node();
-	void addEdge(Edge* edge);
+	bool addEdge(Edge* edge);
 	void setIndex(const unsigned int& index);
 	const unsigned int& getIndex() const;
 	const Vector2D& getPosition() const;

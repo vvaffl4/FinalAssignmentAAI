@@ -13,9 +13,17 @@ Node::Node(const Vector2D& position) :
 	_position(position)
 {}
 
-void Node::addEdge(Edge* edge)
+bool Node::addEdge(Edge* edge)
 {
+	for(auto edgeIt = _edgeVector.cbegin(); edgeIt != _edgeVector.cend(); ++edgeIt)
+	{
+		if (edge->getSource()->getIndex() == (*edgeIt)->getSource()->getIndex() &&
+			edge->getTarget()->getIndex() == (*edgeIt)->getTarget()->getIndex())
+			return false;
+	}
+
 	_edgeVector.push_back(edge);
+	return true;
 }
 
 void Node::setIndex(const unsigned int & index)

@@ -25,19 +25,37 @@ void Graph::addNode(Node* node)
 
 void Graph::generateGraph()
 {
-	Environment* environment = Environment::GetInstance();
-
 	_startX = 400;
-	_startY = 300;
+	_startY = 210;
 
-	_offsetX = 30;
-	_offsetY = 30;
+	_offsetX = 45;
+	_offsetY = 45;
 
 	floodfill(0, 0, nullptr);
 }
 
 void Graph::floodfill(int x, int y, Node* previous)
 {
+	if (x > 10 || x < -10 || y > 10 || y < -10)
+		return;
+
+	Environment* environment = Environment::GetInstance();
+
+	if(previous != nullptr)
+	{ 
+		if (environment->isPathObstructed(
+			previous->getPosition(), 
+			Vector2D(
+				_startX + (x * _offsetX), 
+				_startY + (y * _offsetY))) ||
+			environment->isEdgeObstructed(
+				previous->getPosition(),
+				Vector2D(
+					_startX + (x * _offsetX),
+					_startY + (y * _offsetY))))
+			return;
+	}
+
 	for(auto nodeIt = _nodeVector.begin(); nodeIt != _nodeVector.end(); ++nodeIt)
 	{
 		Node* node = (*nodeIt);
@@ -48,8 +66,11 @@ void Graph::floodfill(int x, int y, Node* previous)
 			Edge* edgeForth = new TwoSidedEdge(node, previous, 1.0f);
 			Edge* edgeBack = new TwoSidedEdge(previous, node, 1.0f);
 
-			previous->addEdge(edgeBack);
-			node->addEdge(edgeForth);
+			if (!previous->addEdge(edgeBack))
+				delete edgeBack;
+
+			if(!node->addEdge(edgeForth))
+				delete edgeForth;
 
 			return;
 		}
@@ -60,18 +81,6 @@ void Graph::floodfill(int x, int y, Node* previous)
 		_startY + y * _offsetY));
 	node->setIndex(_nodeVector.size());
 	_nodeVector.push_back(node);
-
-	if(previous != nullptr)
-	{
-		Edge* edgeForth = new TwoSidedEdge(node, previous, 1.0f);
-		Edge* edgeBack = new TwoSidedEdge(previous, node, 1.0f);
-
-		node->addEdge(edgeForth);
-		previous->addEdge(edgeBack);
-	}
-
-	if (x > 3 || x < -3 || y > 3 || y < -3)
-		return;
 
 	floodfill(x, y + 1, node);
 	floodfill(x, y - 1, node);
