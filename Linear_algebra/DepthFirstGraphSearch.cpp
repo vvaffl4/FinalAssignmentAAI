@@ -6,16 +6,11 @@ DepthFirstGraphSearch::DepthFirstGraphSearch()
 {
 }
 
-DepthFirstGraphSearch::DepthFirstGraphSearch(Node* start, Node* end) :
-	GraphSearch(start, end)
-{}
-
-
 DepthFirstGraphSearch::~DepthFirstGraphSearch()
 {
 }
 
-Path* DepthFirstGraphSearch::searchGraph()
+Path* DepthFirstGraphSearch::searchGraph(const Node* start, const Node* end)
 {
 	Path* path = new Path(false);
 
@@ -24,7 +19,6 @@ Path* DepthFirstGraphSearch::searchGraph()
 	std::vector<unsigned int> nodesVisitedMap;
 
 	//Starting node
-
 	TwoSidedEdge dummy(_start, _start, 0);
 
 	edgeStack.push(&dummy);

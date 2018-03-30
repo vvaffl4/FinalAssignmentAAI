@@ -1,52 +1,79 @@
 #include "Environment.h"
-
-
+#include "Vehicle.h"
+#include "AStarGraphSearch.h"
 
 Environment::Environment()
 {
+	_graph = nullptr;
 }
 
 
-Environment* Environment::environment = 0;
+Environment* Environment::_environment = 0;
 Environment* Environment::GetInstance() {
-	if (environment == 0)
-		environment = new Environment();
-	return environment;
+	if (_environment == 0)
+		_environment = new Environment();
+	return _environment;
 }
 
 
 Environment::~Environment()
 {
+	delete _graph;
 }
 
-void Environment::addVehicle(Vehicle* vehicle)
+void Environment::generateGraph()
 {
-	_vehicles.push_back(vehicle);
+	_graph = new Graph();
+	_graph->generateGraph();
 }
 
-const std::vector<Vehicle*>& Environment::getVehicles() const
+Path* Environment::findPath(const Vector2D& start, const Vector2D& end) const
 {
-	return _vehicles;
+	Path* path = nullptr;
+	if (_graph != nullptr)
+	{
+		GraphSearch* graphSearch = new AStarGraphSearch();
+		path = _graph->findPath(start, end, graphSearch);
+		delete graphSearch;
+	}
+	return path;
 }
 
-void Environment::addObstacle(Obstacle* obstacle)
-{
-	_obstacles.push_back(obstacle);
-}
 
-const std::vector<Obstacle*>& Environment::getObstacles() const
+void Environment::render(SDL_Renderer* gRenderer, double delta)
 {
-	return _obstacles;
-}
+	/*
+	* Graph
+	*/
+	if(_graphRender)
+	{
+		_graph->render(gRenderer);
+	}
 
-void Environment::addWall(Wall* wall)
-{
-	_walls.push_back(wall);
-}
+	/*
+	* Obstacles
+	*/
+	for (auto& obstacle : _obstacles)
+	{
+		obstacle->render(gRenderer);
+	}
 
-const std::vector<Wall*>& Environment::getWalls() const
-{
-	return _walls;
+	/*
+	* Walls
+	*/
+	for (auto& wall : _walls)
+	{
+		wall->render(gRenderer);
+	}
+
+	/*
+	* Wandering vehicles
+	*/
+	for (auto& vehicle : _vehicles)
+	{
+		vehicle->update(static_cast<float>(delta) / 1000);
+		vehicle->render(gRenderer);
+	}
 }
 
 bool Environment::rayIntersectsObstacle(Vector2D start, Vector2D end, Obstacle* obs)
@@ -117,12 +144,71 @@ bool Environment::isPathObstructed(Vector2D start, Vector2D end)
 	return false;
 }
 
-bool Environment::isEdgeObstructed(Vector2D start, Vector2D end)
+bool Environment::isEdgeObstructed(const Vector2D& start, const Vector2D& end)
 {
-	for (auto iter = _walls.cbegin(); iter != _walls.cend(); ++iter) {
-		if ((*iter)->intersectSimple(start, end))
+	if (isPointOutside(end))
+		return true;
+
+	for (auto iter : getObstacles())
+	{
+		if (rayIntersectsObstacle(start, end, iter))
+			return true;
+	}
+	for (auto wall : _walls)
+	{
+		if (wall->intersectSimple(start, end))
 			return true;
 	}
 	return false;
 }
 
+bool Environment::isPointOutside(const Vector2D& point) const
+{
+	return (point.x < 0 || point.x >= _width || point.y < 0 || point.y >= _height);
+}
+
+void Environment::setSize(int width, int height)
+{
+	_width = width;
+	_height = height;
+}
+
+void Environment::addVehicle(Vehicle* vehicle)
+{
+	_vehicles.push_back(vehicle);
+}
+
+const std::vector<Vehicle*>& Environment::getVehicles() const
+{
+	return _vehicles;
+}
+
+void Environment::addObstacle(Obstacle* obstacle)
+{
+	_obstacles.push_back(obstacle);
+}
+
+const std::vector<Obstacle*>& Environment::getObstacles() const
+{
+	return _obstacles;
+}
+
+void Environment::addWall(Wall* wall)
+{
+	_walls.push_back(wall);
+}
+
+const std::vector<Wall*>& Environment::getWalls() const
+{
+	return _walls;
+}
+
+void Environment::toggleGraphRendering()
+{
+	_graphRender = !_graphRender;
+}
+
+const Graph* Environment::getGraph() const
+{
+	return _graph;
+}

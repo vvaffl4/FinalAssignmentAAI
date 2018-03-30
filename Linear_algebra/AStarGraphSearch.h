@@ -16,9 +16,8 @@ private:
 
 public:
 	AStarGraphSearch();
-	AStarGraphSearch(Node* start, Node* end);
 	~AStarGraphSearch();
-	Path* searchGraph() override;
+	Path* searchGraph(const Node* start, const Node* end) override;
 	bool operator()(const Node* i, const Node* j);
 	bool visited(const std::vector<unsigned>& nodeVector, const unsigned int& index) const;
 };

@@ -4,6 +4,7 @@
 #include <list>
 #include "Vector2D.h"
 #include "Edge.h"
+#include <SDL.h>
 
 class Path
 {
@@ -22,6 +23,7 @@ public:
 	bool finished() const;
 	void render(SDL_Renderer* gRenderer) const;
 	Path* smoothPath(smoothingMethod method);
+	void setRepeat(bool repeat);
 };
 
 #endif

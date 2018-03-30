@@ -35,7 +35,7 @@ void Vehicle::update(double delta)
 	Vector2D acceleration = steeringForce / _mass;
 
 	_velocity += acceleration * delta;
-	_velocity.clamp(_maxSpeed);
+	_velocity.clamp(static_cast<float>(_maxSpeed));
 
 	_position += _velocity * delta;
 
@@ -70,13 +70,22 @@ void Vehicle::render(SDL_Renderer* gRenderer)
 	SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderDrawLine(
 		gRenderer,
-		vector1.x, vector1.y, vector2.x, vector2.y);
+		static_cast<int>(vector1.x),
+		static_cast<int>(vector1.y),
+		static_cast<int>(vector2.x),
+		static_cast<int>(vector2.y));
 	SDL_RenderDrawLine(
 		gRenderer,
-		vector2.x, vector2.y, vector3.x, vector3.y);
+		static_cast<int>(vector2.x), 
+		static_cast<int>(vector2.y), 
+		static_cast<int>(vector3.x), 
+		static_cast<int>(vector3.y));
 	SDL_RenderDrawLine(
 		gRenderer,
-		vector3.x, vector3.y, vector1.x, vector1.y);
+		static_cast<int>(vector3.x), 
+		static_cast<int>(vector3.y), 
+		static_cast<int>(vector1.x), 
+		static_cast<int>(vector1.y));
 }
 
 SteeringBehaviorGroup* Vehicle::getSteering() const

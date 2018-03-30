@@ -12,8 +12,12 @@ Path::~Path()
 
 void Path::gotoNextWaypoint()
 {
-	if (++_currentWaypoint == _wayPoints.cend() && _repeat)
+	++_currentWaypoint;
+
+	if (_currentWaypoint == _wayPoints.cend() && _repeat)
 		_currentWaypoint = _wayPoints.cbegin();
+	else if (_currentWaypoint == _wayPoints.cend())
+		_currentWaypoint = --_wayPoints.cend();
 }
 
 void Path::addWaypoint(const Vector2D& waypoint)
@@ -50,10 +54,10 @@ void Path::render(SDL_Renderer* gRenderer) const
 		{
 			SDL_RenderDrawLine(
 				gRenderer,
-				oldWaypoint->x,
-				oldWaypoint->y,
-				waypoint->x,
-				waypoint->y
+				static_cast<int>(oldWaypoint->x),
+				static_cast<int>(oldWaypoint->y),
+				static_cast<int>(waypoint->x),
+				static_cast<int>(waypoint->y)
 			);
 		}
 
@@ -124,4 +128,9 @@ Path* Path::smoothPath(smoothingMethod method)
 	}
 
 	return newPath;
+}
+
+void Path::setRepeat(bool repeat)
+{
+	_repeat = repeat;
 }

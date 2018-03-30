@@ -11,9 +11,8 @@ protected:
 	Node* _end;
 public:
 	GraphSearch();
-	GraphSearch(Node* start, Node* end);
 	virtual ~GraphSearch();
-	virtual Path* searchGraph() = 0;
+	virtual Path* searchGraph(const Node* start, const Node* end) = 0;
 };
 
 #endif

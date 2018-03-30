@@ -8,8 +8,8 @@ SteeringBehaviorGroup::SteeringBehaviorGroup(Vehicle* vehicle, SDL_Renderer* ren
 	double theta = randomFloat() * (3.14159 * 2);
 	
 	_wanderTarget = Vector2D(
-		_wanderRadius * cos(theta),
-		_wanderRadius * sin(theta));
+		static_cast<float>(_wanderRadius * cos(theta)),
+		static_cast<float>(_wanderRadius * sin(theta)));
 }
 
 
@@ -30,10 +30,10 @@ double SteeringBehaviorGroup::randomClamped() const
 Vector2D SteeringBehaviorGroup::pointToLocalSpace(const Vector2D& point, const Vector2D& heading, const Vector2D& side,
 	const Vector2D& position)
 {
-	Vector2D transformPoint = point;
+	const Vector2D transformPoint = point;
 
-	double tX = -position.dotProduct(heading);
-	double tY = -position.dotProduct(side);
+	const float tX = -position.dotProduct(heading);
+	const float tY = -position.dotProduct(side);
 
 	Matrix matrix(
 		heading.x,	heading.y,	tX,
@@ -175,8 +175,8 @@ Vector2D SteeringBehaviorGroup::wander()
 	Vector2D vehicleWanderDistance = _vehicle->getHeading() * _wanderDistance;
 
 	Vector2D vehicleWanderOffset = Vector2D(
-		_wanderRadius * sin(_wanderAngle),
-		_wanderRadius * cos(_wanderAngle)
+		static_cast<float>(_wanderRadius * sin(_wanderAngle)),
+		static_cast<float>(_wanderRadius * cos(_wanderAngle))
 	);
 	
 	return seek(vehiclePosition + vehicleWanderDistance + vehicleWanderOffset);
@@ -210,25 +210,30 @@ Vector2D SteeringBehaviorGroup::hide(const Vehicle* target, const std::vector<Ob
 
 Vector2D SteeringBehaviorGroup::explore(const Vector2D& target)
 {
-	_exploreRadius += _exploreIncement;
 	const Vector2D offset = Vector2D(
-		sin(_exploreRadius * 0.3),
-		cos(_exploreRadius * 0.3));
+		static_cast<float>(sin(_exploreRadius * 0.3)),
+		static_cast<float>(cos(_exploreRadius * 0.3)));
 
 	Vector2D point = target + Vector2D::normalize(offset) * _exploreRadius;
 
-//	SDL_SetRenderDrawColor(
-//		_renderer,
-//		255,
-//		0,
-//		0,
-//		255
-//	);
-//	SDL_RenderDrawPoint(
-//		_renderer,
-//		point.x,
-//		point.y
-//	);
+	SDL_SetRenderDrawColor(
+		_renderer,
+		255,
+		0,
+		0,
+		255
+	);
+	SDL_RenderDrawPoint(
+		_renderer,
+		point.x,
+		point.y
+	);
+
+	Environment* environment = Environment::GetInstance();
+	if (environment->isEdgeObstructed(target, point))
+		_exploreRadius = 0.0f;
+	if (Vector2D::distance(_vehicle->getPosition(), point) < 50)
+		_exploreRadius += _exploreIncement;
 
 	return arrive(point, 3);
 }
@@ -239,8 +244,8 @@ Vector2D SteeringBehaviorGroup::followPath(Path* path, const double& distance)
 		path->gotoNextWaypoint();
 
 	if (!path->finished())
-		return seek(path->getCurrentWaypoint());
-	return arrive(path->getCurrentWaypoint(), 1);
+		return arrive(path->getCurrentWaypoint(), 1);
+	return arrive(path->getCurrentWaypoint(), 3);
 }
 
 Vector2D SteeringBehaviorGroup::obstacleAvoidance(const std::vector<Obstacle*>& obstacles)
@@ -293,8 +298,8 @@ Vector2D SteeringBehaviorGroup::obstacleAvoidance(const std::vector<Obstacle*>& 
 
 	if(closestIntersectingObstacle)
 	{
-		const double brakingWeight = 0.2;
-		const double multiplier = 1.0 + (_boxLength - localPositionOfClosestObstacle.x) / _boxLength;
+		const float brakingWeight = 0.2f;
+		const float multiplier = 1.0f + (_boxLength - localPositionOfClosestObstacle.x) / _boxLength;
 		
 		//TESTING OUT OPERATIONS
 //		steeringForce = (closestIntersectingObstacle->getBoundingRadius() - localPositionOfClosestObstacle) * brakingWeight;
