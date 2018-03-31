@@ -44,7 +44,7 @@ public:
 	void addWall(Wall* wall);
 	const std::vector<Wall*>& getWalls() const;
 	void toggleGraphRendering();
-	const Graph* getGraph() const;
+	Graph* getGraph() const;
 };
 
 

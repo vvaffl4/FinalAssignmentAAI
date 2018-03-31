@@ -208,7 +208,7 @@ void Environment::toggleGraphRendering()
 	_graphRender = !_graphRender;
 }
 
-const Graph* Environment::getGraph() const
+Graph* Environment::getGraph() const
 {
 	return _graph;
 }

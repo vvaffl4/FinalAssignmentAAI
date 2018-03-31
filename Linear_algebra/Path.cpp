@@ -107,22 +107,17 @@ Path* Path::smoothPath(smoothingMethod method)
 		//update current
 		
 		//repeat until current is last
-		prev = _wayPoints.back();
 		while (curr != _wayPoints.back()) {
-			for (std::list<Vector2D>::reverse_iterator iter = _wayPoints.rbegin(); (*iter) != curr; ++iter) {
-				if (env->isPathObstructed(curr, (*iter)))
-				{
+			for (auto iter = _wayPoints.rbegin(); (*iter) != curr; ++iter) {
+				if (env->isPathObstructed((*iter), curr)) {
 					//continue
 				}
-				else
-				{
-					//add prev to newPath
-					newPath->addWaypoint(prev);
-					curr = prev;
+				else {
+					//update current
+					newPath->addWaypoint(*iter);
+					curr = (*iter);
 					break;
 				}
-				prev = (*iter);
-				current++;
 			}
 		}
 	}

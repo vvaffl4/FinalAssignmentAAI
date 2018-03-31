@@ -209,12 +209,16 @@ int wmain(int argc, char* args[])
 	 *////////////////////////
 
 
-//	const Graph* graph = environment->getGraph();
+	Graph* graph = environment->getGraph();
+
+	AStarGraphSearch* search = new AStarGraphSearch();
+	Path* errorPath = search->searchGraph(graph->getNodes()[0], graph->getNodes()[graph->getNodes().size() - 1]);
+	errorPath = errorPath->smoothPath(Path::Precise);
 
 	Path* foundPath = environment->findPath(Vector2D(600, 550), Vector2D(200, 50));
 
 	//	Path* roughPath = foundPath->smoothPath(Path::Precise);
-	precisePath = foundPath->smoothPath(Path::Rough);
+	precisePath = foundPath->smoothPath(Path::Precise);
 	precisePath->begin();
 
 	delete foundPath;
@@ -373,7 +377,8 @@ int wmain(int argc, char* args[])
 		 * Draw found path
 		 */
 //		foundPath->render(gRenderer);
-		precisePath->render(gRenderer);
+		//precisePath->render(gRenderer);
+		errorPath->render(gRenderer);
 //		roughPath->render(gRenderer);
 
 		SDL_RenderPresent(gRenderer);
