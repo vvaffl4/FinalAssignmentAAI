@@ -793,3 +793,84 @@ void SteeringBehaviorGroup::setExploreActive(Vector2D target, float priority)
 	_exploreActive = true;
 	_exploreMult = priority;
 }
+
+
+void SteeringBehaviorGroup::setSeekUnactive()
+{
+	_seekActive = false;
+}
+
+void SteeringBehaviorGroup::setFleeUnactive()
+{
+	_fleeActive = false;
+}
+
+void SteeringBehaviorGroup::setArriveUnactive()
+{
+	_arriveActive = false;
+}
+
+void SteeringBehaviorGroup::setPursuitUnactive()
+{
+	_pursuitActive = false;
+}
+
+void SteeringBehaviorGroup::setOffsetPursuitUnactive()
+{
+	_pursuitOffsetActive = false;
+}
+
+void SteeringBehaviorGroup::setEvadeUnactive()
+{
+	_evadeActive = false;
+}
+
+void SteeringBehaviorGroup::setWanderUnactive()
+{
+	_wanderActive = false;
+}
+
+void SteeringBehaviorGroup::setInterposeUnactive()
+{
+	_interposeActive = false;
+}
+
+void SteeringBehaviorGroup::setPathFollowingUnactive()
+{
+	_pathActive = false;
+}
+
+void SteeringBehaviorGroup::setSeperationUnactive()
+{
+	_separationActive = false;
+}
+
+void SteeringBehaviorGroup::setAlignmentUnactive()
+{
+	_alignmentActive = false;
+}
+
+void SteeringBehaviorGroup::setCohesionUnactive()
+{
+	_cohesionActive = false;
+}
+
+void SteeringBehaviorGroup::setExploreUnactive()
+{
+	_exploreActive = false;
+}
+
+void SteeringBehaviorGroup::setObjectAdvoidanceUnactive()
+{
+	_obstacleActive = false;
+}
+
+void SteeringBehaviorGroup::setWallAvoidanceUnactive()
+{
+	_wallActive = false;
+}
+
+void SteeringBehaviorGroup::setHideUnactive()
+{
+	_hideActive = false;
+}
