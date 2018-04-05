@@ -282,6 +282,7 @@ int wmain(int argc, char* args[])
 	vehicleExplore->getSteering()->setWallAvoidanceActive(50.0f);
 //	vehicleExplore->getSteering()->setObjectAdvoidanceActive(10.0f);
 	vehicleExplore->getSteering()->setExploreActive(Vector2D(200, 200), 1.0f);
+//	vehicleExplore->getSteering()->setExploreUnactive();
 	environment->addVehicle(vehicleExplore);
 
 	for(int i = 0; i < 100; ++i)

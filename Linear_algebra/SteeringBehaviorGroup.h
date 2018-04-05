@@ -123,6 +123,23 @@ public:
 	void setObjectAdvoidanceActive(float priority);
 	void setWallAvoidanceActive(float priority);
 	void setHideActive(Vehicle* vehicle, float priority);
+
+	void setSeekUnactive();
+	void setFleeUnactive();
+	void setArriveUnactive();
+	void setPursuitUnactive();
+	void setOffsetPursuitUnactive();
+	void setEvadeUnactive();
+	void setWanderUnactive();
+	void setInterposeUnactive();
+	void setPathFollowingUnactive();
+	void setSeperationUnactive();
+	void setAlignmentUnactive();
+	void setCohesionUnactive();
+	void setExploreUnactive();
+	void setObjectAdvoidanceUnactive();
+	void setWallAvoidanceUnactive();
+	void setHideUnactive();
 };
 
 #endif
