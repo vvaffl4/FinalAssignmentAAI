@@ -7,6 +7,7 @@
 #include "SDL_video.h"
 #include <SDL_render.h>
 #include "Vehicle.h"
+#include "FuzzyLogicVehicle.h"
 #include "Guard.h"
 #include "Path.h"
 #include "Graph.h"
@@ -26,6 +27,7 @@ Environment* environment;
 Vehicle* vehicle;
 Vehicle* vehicleAlpha;
 Vehicle* vehicleExplore;
+Vehicle* fuzzyLogicVehicle;
 Path* precisePath;
 
 int targetX = 400;
@@ -301,6 +303,20 @@ int wmain(int argc, char* args[])
 		environment->addVehicle(smallVehicle);
 	}
 
+	fuzzyLogicVehicle = new FuzzyLogicVehicle(environment, gRenderer);
+	fuzzyLogicVehicle->setPosition(Vector2D(100, 100));
+	fuzzyLogicVehicle->setMaximumSpeed(80);
+	fuzzyLogicVehicle->setMaximumForce(40);
+	fuzzyLogicVehicle->setScale(Vector2D(1.5f, 1.25f));
+	fuzzyLogicVehicle->setBoundingRadius(10);
+	fuzzyLogicVehicle->getSteering()->setSeekActive(environment->getClosestVehicle(fuzzyLogicVehicle)->getPosition(), 1.0f);
+	environment->addVehicle(fuzzyLogicVehicle);
+
+	/*////////////////////////
+	* FUZZY LOGIC SETUP
+	//////////////////////////*/
+
+	//this happens in FuzzyLogicVehicle
 
 	/*////////////////////////
 	* EVENT AND RENDER LOOP
