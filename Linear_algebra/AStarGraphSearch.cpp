@@ -13,14 +13,12 @@ Path* AStarGraphSearch::searchGraph(const Node* start, const Node* end)
 
 	//Stack of edges
 	std::vector<const Node*>		priorityQueue;
-	std::vector<const Node*>		shortestPath;
 	std::vector<unsigned int>		nodesVisitedMap;
 
 	std::map<unsigned int, Edge*>		searchFrontier;		//The next edges to search and possibly added
 	std::map<unsigned int, double>		realCostToNode;		//Cost to node with index
 
 	//Starting node
-//	priorityQueue.push_back(_start);
 	priorityQueue.push_back(start);
 
 	while (!priorityQueue.empty())
@@ -31,15 +29,13 @@ Path* AStarGraphSearch::searchGraph(const Node* start, const Node* end)
 		priorityQueue.erase(priorityQueue.begin());
 
 		//Move node from searchFrontier to shortestPath
-		//		shortestPath.push_back(currentNode);
 		path->addWaypoint(currentNode->getPosition());
-		nodesVisitedMap.push_back(fromIndex);
 
 		//if the end has been found
-//		if (fromIndex == _end->getIndex())
-//			return path;
 		if (fromIndex == end->getIndex())
 			return path;
+
+		nodesVisitedMap.push_back(fromIndex);
 
 		const std::vector<Edge*> nextEdgeVector = currentNode->getEdges();
 
@@ -47,7 +43,6 @@ Path* AStarGraphSearch::searchGraph(const Node* start, const Node* end)
 		for(auto currentEdge = nextEdgeVector.cbegin(); currentEdge != nextEdgeVector.cend(); ++currentEdge)
 		{ 
 			//calculate the heuristic cost from current to currentEdge target
-//			const double heuristicCost = GraphSearchHeuristic::calculateEuclid(_end->getPosition(), (*currentEdge)->getTarget()->getPosition());
 			const double heuristicCost = GraphSearchHeuristic::calculateEuclid(end->getPosition(), (*currentEdge)->getTarget()->getPosition());
 			
 			//calculate the real cost from currentNode to currentEdge target

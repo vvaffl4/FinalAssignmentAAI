@@ -335,33 +335,7 @@ int wmain(int argc, char* args[])
 		SDL_RenderClear(gRenderer);
 
 		environment->render(gRenderer, delta);
-		/*
-		 * Obstacles
-		 */
-//		const std::vector<Obstacle*> obstacles = environment->getObstacles();
-//		for(int i = 0, il = obstacles.size(); i < il; ++i)
-//		{
-//			obstacles[i]->render(gRenderer);
-//		}
-//
-//		/*
-//		 * Walls
-//		 */
-//		const std::vector<Wall*> walls = environment->getWalls();
-//		for (int i = 0, il = walls.size(); i < il; ++i)
-//		{
-//			walls[i]->render(gRenderer);
-//		}
-//
-//		/*
-//		 * Wandering vehicles
-//		 */
-//		const std::vector<Vehicle*>& vehicles = environment->getVehicles();
-//		for (int i = 0, il = vehicles.size(); i < il; ++i)
-//		{
-//			vehicles[i]->update(static_cast<float>(delta) / 1000);
-//			vehicles[i]->render(gRenderer);
-//		}
+
 //
 //		/*
 //		 * Draw Graph

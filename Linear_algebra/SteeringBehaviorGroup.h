@@ -53,9 +53,9 @@ private:
 	float _exploreRadius = 0.0f;
 	float _exploreIncement = 0.05f;
 
-	double _wanderRadius	= 200;
-	double _wanderDistance	= 250;
-	double _wanderJitter	= 0.02 * 3.14159;
+	double _wanderRadius	= 50;
+	double _wanderDistance	= 75;
+	double _wanderJitter	= 0.1 * 3.14159;
 	double _wanderAngle		= 0.0;
 
 	double _boxLength		= 0.0;
@@ -74,12 +74,14 @@ private:
 	Vector2D pointToLocalSpace(const Vector2D& point, const Vector2D& heading, const Vector2D& side, const Vector2D& position);
 	Vector2D vectorToWorldSpace(const Vector2D& vector, const Vector2D& heading, const Vector2D& side);
 	Vector2D findHidingPosition(const Vector2D& position, double, const Vector2D& target);
+	Vector2D pointToWorldSpace(const Vector2D& point, const Vector2D& heading, const Vector2D& side, const Vector2D& position);
+	double min(const double value1, const double value2) const;
+	double turnAroundTime(const Vehicle* agent, Vector2D target);
 
 	Vector2D seek(const Vector2D& input);
 	Vector2D flee(const Vector2D& input);
 	Vector2D arrive(const Vector2D& input, double deceleration);
 	Vector2D pursuit(const Vehicle* target);
-	Vector2D pointToWorldSpace(const Vector2D& point, const Vector2D& heading, const Vector2D& side, const Vector2D& position);
 	Vector2D offsetPursuit(const Vehicle* target, Vector2D);
 	Vector2D evade(const Vehicle* target);
 	Vector2D wander();

@@ -1,6 +1,5 @@
 #include "SteeringBehaviorGroup.h"
 
-
 SteeringBehaviorGroup::SteeringBehaviorGroup(Vehicle* vehicle, SDL_Renderer* renderer) :
 	_vehicle(vehicle),
 	_renderer(renderer)
@@ -52,6 +51,24 @@ Vector2D SteeringBehaviorGroup::pointToWorldSpace(const Vector2D& point, const V
 		.translate(position)) * point;
 }
 
+double SteeringBehaviorGroup::min(const double value1, const double value2) const
+{
+	if(value1 < value2)
+		return value1;
+	if (value1 > value2)
+		return value2;
+	return value1;
+}
+
+double SteeringBehaviorGroup::turnAroundTime(const Vehicle* agent, Vector2D target)
+{
+	Vector2D targetNormal = Vector2D::normalize(target - agent->getPosition());
+	double targetNormalDot = agent->getHeading().dotProduct(targetNormal);
+
+	const double coefficient = -0.5;
+	return (targetNormalDot - 1.0) * coefficient;
+}
+
 Vector2D SteeringBehaviorGroup::vectorToWorldSpace(const Vector2D& vector, const Vector2D& heading,
 	const Vector2D& side)
 {
@@ -85,22 +102,18 @@ Vector2D SteeringBehaviorGroup::flee(const Vector2D & input)
 	return ((Vector2D::normalize(_vehicle->getPosition() - input) * _vehicle->getMaximumSpeed()) - _vehicle->getVelocity());
 }
 
-Vector2D SteeringBehaviorGroup::arrive(const Vector2D & input, double deceleration)
+Vector2D SteeringBehaviorGroup::arrive(const Vector2D & input, const double deceleration)
 {
 	Vector2D target = input - _vehicle->getPosition();
 
-	double distance = target.magnitude(); // get length/magnitude
+	const double distance = target.magnitude(); // get length/magnitude
 
 	if(distance > 0)
 	{
 		const double decelerationAdjustment = 0.3;
-		double speed = distance / (deceleration * decelerationAdjustment);
-		
-		if (speed > _vehicle->getMaximumSpeed())
-			speed = _vehicle->getMaximumSpeed();
+		const double speed = min(distance / (deceleration * decelerationAdjustment), _vehicle->getMaximumSpeed());
 
 		return ((target * speed / distance) - _vehicle->getVelocity());
-
 	}
 	return Vector2D();
 }
@@ -111,16 +124,14 @@ Vector2D SteeringBehaviorGroup::pursuit(const Vehicle* target)
 	const double relativeHeading = _vehicle->getHeading().dotProduct(target->getHeading());
 
 	if((targetDirection.dotProduct(_vehicle->getHeading()) > 0) && (relativeHeading < -0.95))
-	{
 		return seek(target->getPosition());
-	}
 
 	return seek(target->getPosition() + target->getVelocity() * (targetDirection.magnitude() / (_vehicle->getMaximumSpeed() + target->getVelocity().magnitude())));
 }
 
 Vector2D SteeringBehaviorGroup::offsetPursuit(const Vehicle* target, const Vector2D offset)
 {
-	Vector2D offsetPosition = target->getPosition() + pointToWorldSpace(
+	const Vector2D offsetPosition = target->getPosition() + pointToWorldSpace(
 		offset,
 		target->getHeading(),
 		target->getSide(),
@@ -128,7 +139,7 @@ Vector2D SteeringBehaviorGroup::offsetPursuit(const Vehicle* target, const Vecto
 
 	Vector2D toOffset = offsetPosition - _vehicle->getPosition();
 
-	double lookAheadTime = offset.magnitude() / (_vehicle->getMaximumSpeed() + target->getVelocity().magnitude());
+	const double lookAheadTime = offset.magnitude() / (_vehicle->getMaximumSpeed() + target->getVelocity().magnitude());
 
 	return arrive(offsetPosition + target->getVelocity() * lookAheadTime, 3);
 }
@@ -144,43 +155,67 @@ Vector2D SteeringBehaviorGroup::evade(const Vehicle* target)
 	return flee(target->getPosition() + target->getVelocity() * (targetDirection.magnitude() / (_vehicle->getMaximumSpeed() + target->getVelocity().magnitude())));
 }
 
-//Vector2D SteeringBehaviorGroup::wander()
-//{
-//	_wanderTarget += Vector2D(
-//		randomClamped() * _wanderJitter,
-//		randomClamped() * _wanderJitter);
-//
-//	_wanderTarget.normalize();
-//
-//	_wanderTarget *= _wanderRadius;
-//
-//	Vector2D target = _wanderTarget + Vector2D(_wanderDistance, 0);
-//	
-//	Vector2D vehicleHeading = _vehicle->getHeading();
-//	Vector2D vehicleSide = _vehicle->getSide();
-//	Vector2D vehiclePosition = _vehicle->getPosition();
-//
-//	Matrix matrix = Matrix(3, 3)
-//		.rotate(vehicleHeading, vehicleSide)
-//		.translate(vehiclePosition);
-//
-//	return matrix * target - _vehicle->getPosition();
-//}
-
 Vector2D SteeringBehaviorGroup::wander()
 {
-	_wanderAngle += randomClamped() * _wanderJitter;
+	_wanderTarget += Vector2D(
+		randomClamped() * _wanderJitter,
+		randomClamped() * _wanderJitter);
 
-	Vector2D vehiclePosition = _vehicle->getPosition();
-	Vector2D vehicleWanderDistance = _vehicle->getHeading() * _wanderDistance;
+	_wanderTarget.normalize();
+	_wanderTarget *= _wanderRadius;
 
-	Vector2D vehicleWanderOffset = Vector2D(
-		static_cast<float>(_wanderRadius * sin(_wanderAngle)),
-		static_cast<float>(_wanderRadius * cos(_wanderAngle))
-	);
-	
-	return seek(vehiclePosition + vehicleWanderDistance + vehicleWanderOffset);
+	Vector2D targetLocal = _wanderTarget + Vector2D(_wanderDistance, 0);
+	Vector2D targetWorld = pointToWorldSpace(
+		targetLocal,
+		_vehicle->getHeading(),
+		_vehicle->getSide(),
+		_vehicle->getPosition());
+
+	Vector2D point = targetWorld - _vehicle->getPosition();
+
+	SDL_SetRenderDrawColor(
+		_renderer,
+		255,
+		0,
+		0,
+		255);
+	SDL_RenderDrawPoint(
+		_renderer,
+		_vehicle->getPosition().x + point.x,
+		_vehicle->getPosition().y + point.y);
+
+	return point;
 }
+
+//Vector2D SteeringBehaviorGroup::wander()
+//{
+//	_wanderAngle += randomClamped() * _wanderJitter;
+//
+//	Vector2D vehiclePosition = _vehicle->getPosition();
+//	Vector2D vehicleWanderDistance = _vehicle->getHeading() * _wanderDistance;
+//
+//	Vector2D vehicleWanderOffset = Vector2D(
+//		static_cast<float>(_wanderRadius * sin(_wanderAngle)),
+//		static_cast<float>(_wanderRadius * cos(_wanderAngle))
+//	);
+//	
+//	const Vector2D point = vehiclePosition + vehicleWanderDistance + vehicleWanderOffset;
+//
+//	SDL_SetRenderDrawColor(
+//		_renderer,
+//		255,
+//		0,
+//		0,
+//		255
+//	);
+//	SDL_RenderDrawPoint(
+//		_renderer,
+//		point.x,
+//		point.y
+//	);
+//
+//	return seek(point);
+//}
 
 Vector2D SteeringBehaviorGroup::hide(const Vehicle* target, const std::vector<Obstacle*>& obstacles)
 {
