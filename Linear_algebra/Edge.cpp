@@ -35,11 +35,19 @@ const float Edge::getTravelCost() const
 	return _travelCost;
 }
 
+void Edge::setColor(unsigned red, unsigned green, unsigned blue, unsigned alpha)
+{
+	_red = red;
+	_green = green;
+	_blue = blue;
+	_alpha = alpha;
+}
+
 void Edge::render(SDL_Renderer* gRenderer) const
 {
 	SDL_SetRenderDrawColor(
 		gRenderer,
-		0, 0, 0, 255);
+		_red, _green, _blue, _alpha);
 	SDL_RenderDrawLine(
 		gRenderer,
 		_sourceNode->getPosition().x,

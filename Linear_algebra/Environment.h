@@ -6,6 +6,8 @@
 #include "Obstacle.h"
 #include "Wall.h"
 #include "Graph.h"
+#include <map>
+#include "AStarGraphSearch.h"
 
 class Vehicle;
 
@@ -16,10 +18,11 @@ private:
 	int						_width = 0;
 	int						_height = 0;
 
-	static Environment*		_environment;
-	std::vector<Obstacle*>	_obstacles;
-	std::vector<Wall*>		_walls;
-	std::vector<Vehicle*>	_vehicles;
+	static Environment*			_environment;
+	std::vector<Obstacle*>		_obstacles;
+	std::vector<Wall*>			_walls;
+	std::vector<Vehicle*>		_vehicles;
+	AStarGraphSearch*			_graphSearch;
 	Graph*					_graph;
 	
 	bool _graphRender = false;
@@ -30,7 +33,7 @@ public:
 	static Environment* GetInstance();
 	~Environment();
 	void generateGraph();
-	Path* findPath(const Vector2D& start, const Vector2D& end) const;
+	Path* findPath(const Vector2D& start, const Vector2D& end);
 	void render(SDL_Renderer* gRenderer, double delta);
 	bool rayIntersectsObstacle(Vector2D start, Vector2D end, Obstacle* obs);
 	bool isPathObstructed(Vector2D start, Vector2D end);

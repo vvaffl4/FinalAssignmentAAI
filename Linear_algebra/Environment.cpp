@@ -1,10 +1,10 @@
 #include "Environment.h"
 #include "Vehicle.h"
-#include "AStarGraphSearch.h"
 
 Environment::Environment()
 {
 	_graph = nullptr;
+	_graphSearch = nullptr;
 }
 
 
@@ -19,6 +19,7 @@ Environment* Environment::GetInstance() {
 Environment::~Environment()
 {
 	delete _graph;
+	delete _graphSearch;
 }
 
 void Environment::generateGraph()
@@ -27,14 +28,15 @@ void Environment::generateGraph()
 	_graph->generateGraph();
 }
 
-Path* Environment::findPath(const Vector2D& start, const Vector2D& end) const
+Path* Environment::findPath(const Vector2D& start, const Vector2D& end)
 {
 	Path* path = nullptr;
 	if (_graph != nullptr)
 	{
-		GraphSearch* graphSearch = new AStarGraphSearch();
-		path = _graph->findPath(start, end, graphSearch);
-		delete graphSearch;
+		delete _graphSearch;
+
+		_graphSearch = new AStarGraphSearch();
+		path = _graph->findPath(start, end, _graphSearch);
 	}
 	return path;
 }
@@ -48,6 +50,16 @@ void Environment::render(SDL_Renderer* gRenderer, double delta)
 	if(_graphRender)
 	{
 		_graph->render(gRenderer);
+	}
+
+	if(!_graphSearch->getSearchFrontier().empty())
+	{
+		const std::map<unsigned, Edge*>& searchFrontier = _graphSearch->getSearchFrontier();
+
+		for (const auto& edge : searchFrontier)
+		{
+			edge.second->render(gRenderer);
+		}
 	}
 
 	/*

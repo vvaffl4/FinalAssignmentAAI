@@ -5,7 +5,10 @@ AStarGraphSearch::AStarGraphSearch()
 = default;
 
 AStarGraphSearch::~AStarGraphSearch()
-= default;
+{
+	for (const auto& edge : searchFrontier)
+		edge.second->setColor(0, 0, 0, 255);
+}
 
 Path* AStarGraphSearch::searchGraph(const Node* start, const Node* end)
 {
@@ -15,7 +18,7 @@ Path* AStarGraphSearch::searchGraph(const Node* start, const Node* end)
 	std::vector<const Node*>		priorityQueue;
 	std::vector<unsigned int>		nodesVisitedMap;
 
-	std::map<unsigned int, Edge*>		searchFrontier;		//The next edges to search and possibly added
+			//The next edges to search and possibly added
 	std::map<unsigned int, double>		realCostToNode;		//Cost to node with index
 
 	//Starting node
@@ -49,6 +52,8 @@ Path* AStarGraphSearch::searchGraph(const Node* start, const Node* end)
 			const double realCost = realCostToNode[fromIndex] + (*currentEdge)->getTravelCost();
 			
 			const unsigned int toIndex = (*currentEdge)->getTarget()->getIndex();
+
+			(*currentEdge)->setColor(255, 0, 0, 255);
 
 			if(searchFrontier[toIndex] == nullptr)
 			{
@@ -87,4 +92,9 @@ bool AStarGraphSearch::visited(const std::vector<unsigned>& nodeVector, const un
 			return true;
 	}
 	return false;
+}
+
+std::map<unsigned, Edge*> AStarGraphSearch::getSearchFrontier() const
+{
+	return searchFrontier;
 }

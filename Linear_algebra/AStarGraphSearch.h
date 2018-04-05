@@ -10,9 +10,10 @@
 class AStarGraphSearch : public GraphSearch
 {
 private:
-	std::map<unsigned int, double>			_totalCostToNode;
-	std::vector<const Edge*>	_shortedPathTree;	//Shortest current route
-	std::vector<double>			_costToNode;		//Cost to node with index
+	std::map<unsigned int, double>		_totalCostToNode;
+	std::vector<const Edge*>			_shortedPathTree;	//Shortest current route
+	std::vector<double>					_costToNode;		//Cost to node with index
+	std::map<unsigned int, Edge*>		searchFrontier;
 
 public:
 	AStarGraphSearch();
@@ -20,6 +21,7 @@ public:
 	Path* searchGraph(const Node* start, const Node* end) override;
 	bool operator()(const Node* i, const Node* j);
 	bool visited(const std::vector<unsigned>& nodeVector, const unsigned int& index) const;
+	std::map<unsigned, Edge*> getSearchFrontier() const;
 };
 
 #endif
