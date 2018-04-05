@@ -212,3 +212,25 @@ Graph* Environment::getGraph() const
 {
 	return _graph;
 }
+
+Vehicle * Environment::getClosestVehicle(Vehicle * vehicle)
+{
+	//loop through all vehicles
+	//calc distance
+	//compare to closest found
+	//update closest found when necessary
+
+	float closest = FLT_MAX;
+	Vehicle* closestVehicle = vehicle;
+	for (auto &Vehicle : _vehicles) {
+		if (Vehicle != vehicle) {
+			float dist = Vector2D::distance(vehicle->getPosition(), Vehicle->getPosition());
+			if (dist < closest) {
+				closest = dist;
+				closestVehicle = Vehicle;
+			}
+		}
+	}
+
+	return closestVehicle;
+}

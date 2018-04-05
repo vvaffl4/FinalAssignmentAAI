@@ -25,7 +25,7 @@ public:
 	Vehicle();
 	Vehicle(Environment* environment, SDL_Renderer* renderer);
 	~Vehicle();
-	void update(double delta);
+	virtual void update(double delta);
 	void render(SDL_Renderer* gRenderer);
 	SteeringBehaviorGroup* getSteering() const;
 	Environment* getEnvironment() const;

@@ -138,6 +138,7 @@
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="FuzzyLogic.cpp" />
+    <ClCompile Include="FuzzyLogicVehicle.cpp" />
     <ClCompile Include="FuzzyModule.cpp" />
     <ClCompile Include="FuzzyOperators.cpp" />
     <ClCompile Include="FuzzyRule.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="DepthFirstGraphSearch.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Environment.h" />
+    <ClInclude Include="FuzzyLogicVehicle.h" />
     <ClInclude Include="FuzzyModule.h" />
     <ClInclude Include="FuzzyOperators.h" />
     <ClInclude Include="FuzzyRule.h" />

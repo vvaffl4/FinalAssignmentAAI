@@ -7,15 +7,13 @@
 #include "SDL_video.h"
 #include <SDL_render.h>
 #include "Vehicle.h"
+#include "FuzzyLogicVehicle.h"
 #include "Guard.h"
 #include "Path.h"
 #include "Graph.h"
 #include "TwoSidedEdge.h"
 #include "DepthFirstGraphSearch.h"
 #include "AStarGraphSearch.h"
-#include "FuzzyModule.h"
-#include "FuzzyVariable.h"
-#include "FuzzyOperators.h"
 
 int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 600;
@@ -29,6 +27,7 @@ Environment* environment;
 Vehicle* vehicle;
 Vehicle* vehicleAlpha;
 Vehicle* vehicleExplore;
+Vehicle* fuzzyLogicVehicle;
 Path* precisePath;
 
 int targetX = 400;
@@ -304,53 +303,20 @@ int wmain(int argc, char* args[])
 		environment->addVehicle(smallVehicle);
 	}
 
+	fuzzyLogicVehicle = new FuzzyLogicVehicle(environment, gRenderer);
+	fuzzyLogicVehicle->setPosition(Vector2D(100, 100));
+	fuzzyLogicVehicle->setMaximumSpeed(80);
+	fuzzyLogicVehicle->setMaximumForce(40);
+	fuzzyLogicVehicle->setScale(Vector2D(1.5f, 1.25f));
+	fuzzyLogicVehicle->setBoundingRadius(10);
+	fuzzyLogicVehicle->getSteering()->setSeekActive(environment->getClosestVehicle(fuzzyLogicVehicle)->getPosition(), 1.0f);
+	environment->addVehicle(fuzzyLogicVehicle);
+
 	/*////////////////////////
 	* FUZZY LOGIC SETUP
 	//////////////////////////*/
 
-	FuzzyModule fm;
-
-	//create variables
-	FuzzyVariable &distToFuel = fm.CreateFLV("distToFuel");
-	FzSet Fuel_Close = distToFuel.AddLeftShoulderSet("Fuel_Close", 0, 50, 100);
-	FzSet Fuel_Medium = distToFuel.AddTriangularSet("Fuel_Medium", 50, 100, 150);
-	FzSet Fuel_Far = distToFuel.AddRightShoulderSet("Fuel_Far", 100, 150, 300);
-
-	FuzzyVariable &distToSmallAgents = fm.CreateFLV("distToSmallAgents");
-	FzSet Agents_Close = distToSmallAgents.AddLeftShoulderSet("Agents_Close", 0, 25, 75);
-	FzSet Agents_Medium = distToSmallAgents.AddTriangularSet("Agents_Medium", 25, 75, 150);
-	FzSet Agents_Far = distToSmallAgents.AddRightShoulderSet("Agents_Far", 75, 150, 300);
-/*
-	FuzzyVariable &remainingFuel = fm.CreateFLV("remainingFuel");
-	FzSet Fuel_High = distToFuel.AddLeftShoulderSet("Fuel_High", 0, 25, 50);
-	FzSet Fuel_Medium = distToFuel.AddTriangularSet("Fuel_Medium", 25, 50, 75);
-	FzSet Fuel_Low = distToFuel.AddRightShoulderSet("Fuel_Low", 50, 75, 100);*/
-
-	FuzzyVariable &desirability = fm.CreateFLV("desirability");
-	FzSet Undesirable = desirability.AddLeftShoulderSet("Undesirable", 0, 25, 50);
-	FzSet Desirable = desirability.AddLeftShoulderSet("Desirable", 25, 50, 75);
-	FzSet Very_Desirable = desirability.AddLeftShoulderSet("Very_Desirable", 50, 75, 100);
-
-	//create rules
-	//desirability is desirability to chase agents
-	fm.AddRule(*(new FzAND(Fuel_Far, Agents_Far)), Desirable);			//if fuel is far and agents far, undesirable
-	fm.AddRule(*(new FzAND(Fuel_Medium, Agents_Far)), Undesirable);		//if fuel is medium and agents far, undesirable
-	fm.AddRule(*(new FzAND(Fuel_Close, Agents_Far)), Undesirable);		//if fuel is close and agents far, undesirable
-	fm.AddRule(*(new FzAND(Fuel_Far, Agents_Medium)), Very_Desirable);		//if fuel is far and agents are medium, desirable
-	fm.AddRule(*(new FzAND(Fuel_Medium, Agents_Medium)), Desirable);	//if fuel is medium and agents are medium, desirable
-	fm.AddRule(*(new FzAND(Fuel_Close, Agents_Medium)), Undesirable);	//if fuel is close and agents are medium, undesirable
-	fm.AddRule(*(new FzAND(Fuel_Far, Agents_Close)), Very_Desirable);	//if fuel is far and agents are close, very desirable
-	fm.AddRule(*(new FzAND(Fuel_Medium, Agents_Close)), Very_Desirable);//if fuel is medium and agents are close, very desirable
-	fm.AddRule(*(new FzAND(Fuel_Close, Agents_Close)), Desirable);		//if fuel is close and agents are close, desirable
-
-	//fuzzy logic test data
-	fm.Fuzzify("distToFuel", 250);
-	fm.Fuzzify("distToSmallAgents", 20);
-
-	//seems like the desirability will range from 12.5 to 62.5
-	//if desirability < 37.5 we'll go for fuel
-	//else we'll chase small agents 
-	std::cout << fm.DeFuzzify("desirability", FuzzyModule::max_av) << std::endl;
+	//this happens in FuzzyLogicVehicle
 
 	/*////////////////////////
 	* EVENT AND RENDER LOOP

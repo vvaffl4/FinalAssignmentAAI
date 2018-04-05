@@ -45,6 +45,7 @@ public:
 	const std::vector<Wall*>& getWalls() const;
 	void toggleGraphRendering();
 	Graph* getGraph() const;
+	Vehicle* getClosestVehicle(Vehicle* vehicle);
 };
 
 
