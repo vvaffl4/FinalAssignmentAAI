@@ -150,6 +150,20 @@ int wmain(int argc, char* args[])
 	environment = Environment::GetInstance();
 	environment->setSize(800, 600);
 
+	Deposit* depositTopLeft = new Deposit(200);
+	depositTopLeft->setColor(200, 200, 0, 255);
+	depositTopLeft->setPosition(Vector2D(150, 150));
+	Deposit* depositTopRight = new Deposit(200);
+	depositTopRight->setColor(200, 200, 0, 255);
+	depositTopRight->setPosition(Vector2D(650, 150));
+	Deposit* depositBottom = new Deposit(200);
+	depositBottom->setColor(200, 200, 0, 255);
+	depositBottom->setPosition(Vector2D(400, 450));
+
+	environment->addDeposit(depositTopLeft);
+	environment->addDeposit(depositTopRight);
+	environment->addDeposit(depositBottom);
+
 	Obstacle obstacle;
 	obstacle.setPosition(Vector2D(400, 300));
 	environment->addObstacle(&obstacle);
@@ -211,40 +225,18 @@ int wmain(int argc, char* args[])
 	 *////////////////////////
 
 
-	Graph* graph = environment->getGraph();
+//	Graph* graph = environment->getGraph();
 
-	AStarGraphSearch* search = new AStarGraphSearch();
-	Path* errorPath = search->searchGraph(graph->getNodes()[0], graph->getNodes()[graph->getNodes().size() - 1]);
-	errorPath = errorPath->smoothPath(Path::Precise);
+//	AStarGraphSearch* search = new AStarGraphSearch();
+//	Path* errorPath = search->searchGraph(graph->getNodes()[0], graph->getNodes()[graph->getNodes().size() - 1]);
+//	errorPath = errorPath->smoothPath(Path::Precise);
 
 	Path* foundPath = environment->findPath(Vector2D(600, 550), Vector2D(200, 50));
 
-	//	Path* roughPath = foundPath->smoothPath(Path::Precise);
 	precisePath = foundPath->smoothPath(Path::Precise);
 	precisePath->begin();
 
 	delete foundPath;
-//	Path* secondPath = new Path(false);
-//	secondPath->addWaypoint(graph->getNodePosition(65));
-//	secondPath->addWaypoint(graph->getNodePosition(54));
-//	secondPath->addWaypoint(graph->getNodePosition(44));
-//	secondPath->addWaypoint(graph->getNodePosition(34));
-//	secondPath->addWaypoint(graph->getNodePosition(24));
-//	secondPath->addWaypoint(graph->getNodePosition(15));
-//	secondPath->addWaypoint(graph->getNodePosition(16));
-//	secondPath->addWaypoint(graph->getNodePosition(17));
-//	secondPath->addWaypoint(graph->getNodePosition(18));
-//	secondPath->addWaypoint(graph->getNodePosition(29));
-//	secondPath->addWaypoint(graph->getNodePosition(39));
-//	secondPath->addWaypoint(graph->getNodePosition(49));
-//	secondPath->addWaypoint(graph->getNodePosition(59));
-
-//	auto roughPath = secondPath->smoothPath(Path::Rough);
-//	auto precisePath = secondPath->smoothPath(Path::Precise);
-
-//	Vector2D start(350, 380);
-//	Vector2D end(320,350);
-//	std::cout << environment->isPathObstructed(start, end) << std::endl;
 
 
    /*////////////////////////
@@ -252,6 +244,7 @@ int wmain(int argc, char* args[])
 	*////////////////////////
 
 	vehicle = new Vehicle(environment, gRenderer);
+	vehicle->setColor(255, 0, 0, 255);
 	vehicle->setPosition(Vector2D(400, 200));
 	vehicle->setScale(Vector2D(2.0f, 2.0f));
 	vehicle->setMaximumSpeed(100);
@@ -263,6 +256,7 @@ int wmain(int argc, char* args[])
 	environment->addVehicle(vehicle);
 
 	vehicleAlpha = new Vehicle(environment, gRenderer);
+	vehicleAlpha->setColor(0, 0, 255, 255);
 	vehicleAlpha->setPosition(Vector2D(600, 100));
 	vehicleAlpha->setMaximumSpeed(100);
 	vehicleAlpha->setMaximumForce(50.0);
@@ -274,6 +268,7 @@ int wmain(int argc, char* args[])
 
 
 	vehicleExplore = new Vehicle(environment, gRenderer);
+	vehicleExplore->setColor(200, 200, 0, 255);
 	vehicleExplore->setPosition(Vector2D(600, 100));
 	vehicleExplore->setMaximumSpeed(100);
 	vehicleExplore->setMaximumForce(50.0);
@@ -287,6 +282,7 @@ int wmain(int argc, char* args[])
 	for(int i = 0; i < 100; ++i)
 	{
 		Vehicle* smallVehicle = new Vehicle(environment, gRenderer);
+		smallVehicle->setColor(0, 200, 0, 255);
 		smallVehicle->setPosition(Vector2D(static_cast<float>(30 + rand() % 740), static_cast<float>(30 + rand() % 540)));
 		smallVehicle->setScale(Vector2D(0.5f, 0.5f));
 		smallVehicle->setMaximumSpeed(100);
@@ -369,7 +365,7 @@ int wmain(int argc, char* args[])
 		 */
 //		foundPath->render(gRenderer);
 		//precisePath->render(gRenderer);
-		errorPath->render(gRenderer);
+//		errorPath->render(gRenderer);
 //		roughPath->render(gRenderer);
 
 		SDL_RenderPresent(gRenderer);

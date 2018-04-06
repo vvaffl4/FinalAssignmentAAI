@@ -16,6 +16,7 @@ public:
 	virtual int process() = 0;
 	virtual void terminate() = 0;
 	bool handleMessages(Telegram& telegram);
+	bool isComplete();
 };
 
 #endif //GOAL_H

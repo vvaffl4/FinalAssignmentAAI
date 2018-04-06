@@ -39,7 +39,7 @@ FuzzyLogicVehicle::FuzzyLogicVehicle(Environment* environment, SDL_Renderer* ren
 	//else we'll chase small agents 
 	std::cout << fm.DeFuzzify("desirability", FuzzyModule::max_av) << std::endl;
 
-	//zet current target
+	//set current target
 	currentTarget = Environment::GetInstance()->getClosestVehicle(this)->getPosition();
 	getSteering()->setSeekActive(currentTarget, 1.0f);
 	
@@ -61,7 +61,8 @@ void FuzzyLogicVehicle::update(double delta) {
 
 	std::cout << "Desirability to chase agents: " << desirability << std::endl;
 
-	if (desirability < 37.5) {
+	if (desirability < 37.5) 
+	{
 		//chase fuel
 		//set target vector to fuel
 		getSteering()->setSeekActive(Vector2D(150, 400), 1.0f);

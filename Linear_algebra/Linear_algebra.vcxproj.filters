@@ -44,6 +44,7 @@
     <ClCompile Include="Telegram.cpp" />
     <ClCompile Include="AtomicGoal.cpp" />
     <ClCompile Include="FuzzyLogicVehicle.cpp" />
+    <ClCompile Include="Deposit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStarGraphSearch.h" />
@@ -89,5 +90,6 @@
     <ClInclude Include="Telegram.h" />
     <ClInclude Include="AtomicGoal.h" />
     <ClInclude Include="FuzzyLogicVehicle.h" />
+    <ClInclude Include="Deposit.h" />
   </ItemGroup>
 </Project>

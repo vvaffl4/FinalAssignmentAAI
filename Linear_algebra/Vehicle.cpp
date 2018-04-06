@@ -8,6 +8,11 @@ Vehicle::Vehicle() :
 	_topMiddle = Vector2D(0, -10);
 	_bottomLeft = Vector2D(-5, 10);
 	_bottomRight = Vector2D(5, 10);
+
+	_red = 0;
+	_green = 0;
+	_blue = 0;
+	_alpha = 255;
 }
 
 Vehicle::Vehicle(Environment* environment, SDL_Renderer* renderer) :
@@ -17,6 +22,11 @@ Vehicle::Vehicle(Environment* environment, SDL_Renderer* renderer) :
 	_topMiddle = Vector2D(0, -10);
 	_bottomLeft = Vector2D(-5, 10);
 	_bottomRight = Vector2D(5, 10);
+
+	_red = 0;
+	_green = 0;
+	_blue = 0;
+	_alpha = 255;
 }
 
 
@@ -67,7 +77,8 @@ void Vehicle::render(SDL_Renderer* gRenderer)
 	Vector2D vector2 = positionMatrix * _bottomLeft;
 	Vector2D vector3 = positionMatrix * _bottomRight;
 
-	SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(gRenderer, 
+		_red, _green, _blue, _alpha);
 	SDL_RenderDrawLine(
 		gRenderer,
 		static_cast<int>(vector1.x),
@@ -86,6 +97,14 @@ void Vehicle::render(SDL_Renderer* gRenderer)
 		static_cast<int>(vector3.y), 
 		static_cast<int>(vector1.x), 
 		static_cast<int>(vector1.y));
+}
+
+void Vehicle::setColor(unsigned red, unsigned green, unsigned blue, unsigned alpha)
+{
+	_red = red;
+	_green = green;
+	_blue = blue;
+	_alpha = alpha;
 }
 
 SteeringBehaviorGroup* Vehicle::getSteering() const

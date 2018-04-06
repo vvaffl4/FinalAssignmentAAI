@@ -134,6 +134,7 @@
     <ClCompile Include="Attack.cpp" />
     <ClCompile Include="BaseEntity.cpp" />
     <ClCompile Include="CompositeGoal.cpp" />
+    <ClCompile Include="Deposit.cpp" />
     <ClCompile Include="DepthFirstGraphSearch.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Environment.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Attack.h" />
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="CompositeGoal.h" />
+    <ClInclude Include="Deposit.h" />
     <ClInclude Include="DepthFirstGraphSearch.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Environment.h" />

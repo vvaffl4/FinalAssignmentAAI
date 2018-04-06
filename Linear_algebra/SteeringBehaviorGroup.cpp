@@ -173,16 +173,16 @@ Vector2D SteeringBehaviorGroup::wander()
 
 	Vector2D point = targetWorld - _vehicle->getPosition();
 
-	SDL_SetRenderDrawColor(
-		_renderer,
-		255,
-		0,
-		0,
-		255);
-	SDL_RenderDrawPoint(
-		_renderer,
-		_vehicle->getPosition().x + point.x,
-		_vehicle->getPosition().y + point.y);
+//	SDL_SetRenderDrawColor(
+//		_renderer,
+//		255,
+//		0,
+//		0,
+//		255);
+//	SDL_RenderDrawPoint(
+//		_renderer,
+//		_vehicle->getPosition().x + point.x,
+//		_vehicle->getPosition().y + point.y);
 
 	return point;
 }
@@ -509,7 +509,7 @@ Vector2D SteeringBehaviorGroup::calculate()
 	if (_hideActive)
 		acceleration += hide(_vehicleAgentAlpha, _vehicle->getEnvironment()->getObstacles());
 	if (_pathActive)
-		acceleration += followPath(_path, 30);
+		acceleration += followPath(_path, 50);
 
 	if(_separationActive || _alignmentActive || _cohesionActive)
 	{

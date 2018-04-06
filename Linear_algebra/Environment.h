@@ -6,8 +6,8 @@
 #include "Obstacle.h"
 #include "Wall.h"
 #include "Graph.h"
-#include <map>
 #include "AStarGraphSearch.h"
+#include "Deposit.h"
 
 class Vehicle;
 
@@ -22,6 +22,7 @@ private:
 	std::vector<Obstacle*>		_obstacles;
 	std::vector<Wall*>			_walls;
 	std::vector<Vehicle*>		_vehicles;
+	std::vector<Deposit*>		_deposits;
 	AStarGraphSearch*			_graphSearch;
 	Graph*					_graph;
 	
@@ -45,6 +46,8 @@ public:
 	void addObstacle(Obstacle* obstacle);
 	const std::vector<Obstacle*>& getObstacles() const;
 	void addWall(Wall* wall);
+	Deposit* getClosestAvailableDeposit(const Vector2D& target);
+	void addDeposit(Deposit* deposit);
 	const std::vector<Wall*>& getWalls() const;
 	void toggleGraphRendering();
 	Graph* getGraph() const;

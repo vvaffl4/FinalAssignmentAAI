@@ -50,17 +50,19 @@ void Environment::render(SDL_Renderer* gRenderer, double delta)
 	if(_graphRender)
 	{
 		_graph->render(gRenderer);
-	}
 
-	if(!_graphSearch->getSearchFrontier().empty())
-	{
-		const std::map<unsigned, Edge*>& searchFrontier = _graphSearch->getSearchFrontier();
-
-		for (const auto& edge : searchFrontier)
+		if (_graphSearch != nullptr)
 		{
-			edge.second->render(gRenderer);
+			const std::map<unsigned, Edge*>& searchFrontier = _graphSearch->getSearchFrontier();
+
+			for (const auto& edge : searchFrontier)
+			{
+				edge.second->setColor(220, 220, 255, 255);
+				edge.second->render(gRenderer);
+			}
 		}
 	}
+
 
 	/*
 	* Obstacles
@@ -79,12 +81,20 @@ void Environment::render(SDL_Renderer* gRenderer, double delta)
 	}
 
 	/*
-	* Wandering vehicles
+	* Vehicles
 	*/
 	for (auto& vehicle : _vehicles)
 	{
 		vehicle->update(static_cast<float>(delta) / 1000);
 		vehicle->render(gRenderer);
+	}
+
+	/*
+	* Deposits
+	*/
+	for (auto& deposit : _deposits)
+	{
+		deposit->render(gRenderer);
 	}
 }
 
@@ -208,6 +218,33 @@ const std::vector<Obstacle*>& Environment::getObstacles() const
 void Environment::addWall(Wall* wall)
 {
 	_walls.push_back(wall);
+}
+
+Deposit* Environment::getClosestAvailableDeposit(const Vector2D& target)
+{
+	double closestDistance = DBL_MAX;
+	Deposit* closestDeposit = nullptr;
+
+	for (auto deposit : _deposits)
+	{
+		if(!deposit->empty())
+		{
+			const double distance = Vector2D::distance(target, deposit->getPosition());
+
+			if(closestDistance > distance)
+			{
+				closestDistance = distance;
+				closestDeposit = deposit;
+			}
+		}
+	}
+
+	return closestDeposit;
+}
+
+void Environment::addDeposit(Deposit* deposit)
+{
+	_deposits.push_back(deposit);
 }
 
 const std::vector<Wall*>& Environment::getWalls() const

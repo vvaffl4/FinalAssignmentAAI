@@ -53,8 +53,6 @@ Path* AStarGraphSearch::searchGraph(const Node* start, const Node* end)
 			
 			const unsigned int toIndex = (*currentEdge)->getTarget()->getIndex();
 
-			(*currentEdge)->setColor(255, 0, 0, 255);
-
 			if(searchFrontier[toIndex] == nullptr)
 			{
 				_totalCostToNode[toIndex]	= (realCost + heuristicCost);

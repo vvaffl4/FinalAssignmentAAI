@@ -16,3 +16,8 @@ bool Goal::handleMessages(Telegram& telegram)
 {
 	return true;
 }
+
+bool Goal::isComplete()
+{
+	return true;
+}
