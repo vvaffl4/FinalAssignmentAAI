@@ -176,8 +176,8 @@ Vector2D& Vector2D::operator*=(const float& other)
 
 Vector2D& Vector2D::operator*=(const double& other)
 {
-	x *= other;
-	y *= other;
+	x *= static_cast<float>(other);
+	y *= static_cast<float>(other);
 
 	return *this;
 }
@@ -200,18 +200,18 @@ Vector2D& Vector2D::operator/=(const Vector2D& other)
 
 Vector2D& Vector2D::operator/=(const double& other)
 {
-	x /= other;
-	y /= other;
+	x /= static_cast<float>(other);
+	y /= static_cast<float>(other);
 
 	return *this;
 }
 
-bool Vector2D::operator!=(const Vector2D & other)
+bool Vector2D::operator!=(const Vector2D & other) const
 {
 	return ((other.x != x) || (other.y != y));
 }
 
-bool Vector2D::operator==(const Vector2D & other)
+bool Vector2D::operator==(const Vector2D & other) const
 {
 	return ((other.x == x) && (other.y == y));
 }

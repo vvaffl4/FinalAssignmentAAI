@@ -7,7 +7,7 @@
 class AtomicGoal : public Goal
 {
 public:
-	AtomicGoal(Vehicle* vehicle);
+	AtomicGoal(VehicleGoalBehavior* vehicle);
 	~AtomicGoal();
 };
 

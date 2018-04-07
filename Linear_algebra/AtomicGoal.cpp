@@ -2,7 +2,7 @@
 
 
 
-AtomicGoal::AtomicGoal(Vehicle* vehicle) :
+AtomicGoal::AtomicGoal(VehicleGoalBehavior* vehicle) :
 	Goal(vehicle)
 {
 }

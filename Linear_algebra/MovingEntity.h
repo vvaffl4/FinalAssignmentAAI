@@ -20,7 +20,7 @@ protected:
 public:
 	MovingEntity();
 	~MovingEntity();
-	void update(double delta);
+	virtual void update(double delta) = 0;
 	void render();
 	Vector2D getVelocity() const;
 	const Vector2D& getHeading() const;

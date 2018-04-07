@@ -7,12 +7,15 @@
 
 class CompositeGoal : public Goal
 {
-private:
+protected:
 	std::list<Goal*> _goalList;
 
 public:
-	CompositeGoal(Vehicle* vehicle);
-	~CompositeGoal();
+	CompositeGoal(VehicleGoalBehavior* vehicle);
+	virtual ~CompositeGoal();
+	void activate() override = 0;
+	int process() override = 0;
+	void terminate() override = 0;
 	int processSubgoals();
 	void removeAllSubgoals();
 	void addNextSubgoal(Goal* goal);

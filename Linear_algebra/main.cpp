@@ -14,6 +14,9 @@
 #include "TwoSidedEdge.h"
 #include "DepthFirstGraphSearch.h"
 #include "AStarGraphSearch.h"
+#include "VehicleGoalBehavior.h"
+#include "Stockpile.h"
+#include "Food.h"
 
 int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 600;
@@ -164,6 +167,22 @@ int wmain(int argc, char* args[])
 	environment->addDeposit(depositTopRight);
 	environment->addDeposit(depositBottom);
 
+	Food* foodRight = new Food();
+	foodRight->setColor(200, 100, 100, 255);
+	foodRight->setPosition(Vector2D(600, 300));
+	Food* foodLeft = new Food();
+	foodLeft->setColor(200, 100, 100, 255);
+	foodLeft->setPosition(Vector2D(200, 300));
+
+	environment->addFood(foodRight);
+	environment->addFood(foodLeft);
+
+	Stockpile* stockpile = new Stockpile();
+	stockpile->setColor(0, 200, 200, 255);
+	stockpile->setPosition(Vector2D(400, 100));
+
+	environment->addStockpile(stockpile);
+
 	Obstacle obstacle;
 	obstacle.setPosition(Vector2D(400, 300));
 	environment->addObstacle(&obstacle);
@@ -279,6 +298,15 @@ int wmain(int argc, char* args[])
 //	vehicleExplore->getSteering()->setExploreUnactive();
 	environment->addVehicle(vehicleExplore);
 
+	Vehicle* vehicleGoal = new VehicleGoalBehavior(environment, gRenderer);
+	vehicleGoal->setColor(200, 0, 200, 255);
+	vehicleGoal->setPosition(Vector2D(400, 100));
+	vehicleGoal->setMaximumSpeed(100);
+	vehicleGoal->setMaximumForce(50.0);
+	vehicleGoal->setBoundingRadius(10);
+	vehicleGoal->getSteering()->setWallAvoidanceActive(50.0f);
+	environment->addVehicle(vehicleGoal);
+
 	for(int i = 0; i < 100; ++i)
 	{
 		Vehicle* smallVehicle = new Vehicle(environment, gRenderer);
@@ -322,7 +350,6 @@ int wmain(int argc, char* args[])
 
 	while(loop)
 	{
-		guard.update();
 
 		const Uint32 now = SDL_GetTicks();
 		if (now > last) 
@@ -330,6 +357,8 @@ int wmain(int argc, char* args[])
 			delta = now - last;
 			last = now;
 		}
+
+		guard.update(delta);
 
 		while(SDL_PollEvent(&gEvent) != 0)
 		{

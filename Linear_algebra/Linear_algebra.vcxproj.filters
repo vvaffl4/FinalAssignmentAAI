@@ -45,6 +45,17 @@
     <ClCompile Include="AtomicGoal.cpp" />
     <ClCompile Include="FuzzyLogicVehicle.cpp" />
     <ClCompile Include="Deposit.cpp" />
+    <ClCompile Include="GoalWander.cpp" />
+    <ClCompile Include="VehicleGoalBehavior.cpp" />
+    <ClCompile Include="GoalThink.cpp" />
+    <ClCompile Include="GoalGetGold.cpp" />
+    <ClCompile Include="GoalArrive.cpp" />
+    <ClCompile Include="Stockpile.cpp" />
+    <ClCompile Include="GoalMineGold.cpp" />
+    <ClCompile Include="GoalStockpileGold.cpp" />
+    <ClCompile Include="Food.cpp" />
+    <ClCompile Include="GoalGetFood.cpp" />
+    <ClCompile Include="GoalTakeFood.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStarGraphSearch.h" />
@@ -91,5 +102,16 @@
     <ClInclude Include="AtomicGoal.h" />
     <ClInclude Include="FuzzyLogicVehicle.h" />
     <ClInclude Include="Deposit.h" />
+    <ClInclude Include="GoalWander.h" />
+    <ClInclude Include="VehicleGoalBehavior.h" />
+    <ClInclude Include="GoalThink.h" />
+    <ClInclude Include="GoalGetGold.h" />
+    <ClInclude Include="GoalArrive.h" />
+    <ClInclude Include="Stockpile.h" />
+    <ClInclude Include="GoalMineGold.h" />
+    <ClInclude Include="GoalStockpileGold.h" />
+    <ClInclude Include="Food.h" />
+    <ClInclude Include="GoalGetFood.h" />
+    <ClInclude Include="GoalTakeFood.h" />
   </ItemGroup>
 </Project>

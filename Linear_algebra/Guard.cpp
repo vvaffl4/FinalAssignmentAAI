@@ -31,7 +31,7 @@ bool Guard::enemyIsClose() const
 	return true;
 }
 
-void Guard::update()
+void Guard::update(double delta)
 {
 	_stateMachine.update(this);
 }

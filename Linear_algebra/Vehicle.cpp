@@ -99,14 +99,6 @@ void Vehicle::render(SDL_Renderer* gRenderer)
 		static_cast<int>(vector1.y));
 }
 
-void Vehicle::setColor(unsigned red, unsigned green, unsigned blue, unsigned alpha)
-{
-	_red = red;
-	_green = green;
-	_blue = blue;
-	_alpha = alpha;
-}
-
 SteeringBehaviorGroup* Vehicle::getSteering() const
 {
 	return _steeringBehavior;

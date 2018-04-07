@@ -50,3 +50,11 @@ unsigned BaseEntity::getId() const
 {
 	return _id;
 }
+
+void BaseEntity::setColor(unsigned red, unsigned green, unsigned blue, unsigned alpha)
+{
+	_red = red;
+	_green = green;
+	_blue = blue;
+	_alpha = alpha;
+}

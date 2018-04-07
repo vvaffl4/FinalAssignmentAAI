@@ -15,9 +15,14 @@ protected:
 	float _boundingRadius;
 	bool _m_bTag;
 
+	unsigned char _red = 0;
+	unsigned char _green = 0;
+	unsigned char _blue = 0;
+	unsigned char _alpha = 255;
+
 public:
 	BaseEntity();
-	~BaseEntity();
+	virtual ~BaseEntity();
 	void setPosition(const Vector2D& position);
 	const Vector2D& getPosition() const;
 	void setScale(const Vector2D& scale);
@@ -26,6 +31,7 @@ public:
 	void setBoundingRadius(float boundingRadius);
 	float getRadius() const;
 	unsigned int getId() const;
+	void setColor(unsigned red, unsigned green, unsigned blue, unsigned alpha);
 
 	template<class T, class CT>
 	static std::list<T*> tagNeighbors(const T* entity, CT& container, double radius)

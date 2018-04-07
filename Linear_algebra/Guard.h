@@ -18,7 +18,7 @@ public:
 	void removeStrength(int strength);
 	int getStrength() const;
 	bool enemyIsClose() const;
-	void update();
+	void update(double delta) override;
 };
 
 #endif

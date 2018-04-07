@@ -138,6 +138,7 @@
     <ClCompile Include="DepthFirstGraphSearch.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="FuzzyLogic.cpp" />
     <ClCompile Include="FuzzyLogicVehicle.cpp" />
     <ClCompile Include="FuzzyModule.cpp" />
@@ -151,6 +152,14 @@
     <ClCompile Include="FuzzyTerm.cpp" />
     <ClCompile Include="FuzzyVariable.cpp" />
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="GoalArrive.cpp" />
+    <ClCompile Include="GoalGetFood.cpp" />
+    <ClCompile Include="GoalGetGold.cpp" />
+    <ClCompile Include="GoalMineGold.cpp" />
+    <ClCompile Include="GoalTakeFood.cpp" />
+    <ClCompile Include="GoalThink.cpp" />
+    <ClCompile Include="GoalWander.cpp" />
+    <ClCompile Include="GoalStockpileGold.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphSearch.cpp" />
     <ClCompile Include="GraphSearchHeuristic.cpp" />
@@ -167,11 +176,13 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="SteeringBehaviorGroup.cpp" />
+    <ClCompile Include="Stockpile.cpp" />
     <ClCompile Include="Telegram.cpp" />
     <ClCompile Include="TwoSidedEdge.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="VehicleGoalBehavior.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +195,7 @@
     <ClInclude Include="DepthFirstGraphSearch.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Environment.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="FuzzyLogicVehicle.h" />
     <ClInclude Include="FuzzyModule.h" />
     <ClInclude Include="FuzzyOperators.h" />
@@ -197,6 +209,14 @@
     <ClInclude Include="FuzzyVariable.h" />
     <ClInclude Include="FzSet.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="GoalArrive.h" />
+    <ClInclude Include="GoalGetFood.h" />
+    <ClInclude Include="GoalGetGold.h" />
+    <ClInclude Include="GoalMineGold.h" />
+    <ClInclude Include="GoalTakeFood.h" />
+    <ClInclude Include="GoalThink.h" />
+    <ClInclude Include="GoalWander.h" />
+    <ClInclude Include="GoalStockpileGold.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphSearch.h" />
     <ClInclude Include="GraphSearchHeuristic.h" />
@@ -212,12 +232,14 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="SteeringBehaviorGroup.h" />
+    <ClInclude Include="Stockpile.h" />
     <ClInclude Include="Telegram.h" />
     <ClInclude Include="TwoSidedEdge.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="VehicleGoalBehavior.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

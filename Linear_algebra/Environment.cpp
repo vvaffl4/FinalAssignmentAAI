@@ -3,6 +3,7 @@
 
 Environment::Environment()
 {
+	_stockpile = nullptr;
 	_graph = nullptr;
 	_graphSearch = nullptr;
 }
@@ -96,6 +97,20 @@ void Environment::render(SDL_Renderer* gRenderer, double delta)
 	{
 		deposit->render(gRenderer);
 	}
+
+	/*
+	* Deposits
+	*/
+	for (auto& food : _foods)
+	{
+		food->render(gRenderer);
+	}
+
+	/*
+	* Stockpile
+	*/
+	if(_stockpile != nullptr)
+		_stockpile->render(gRenderer);
 }
 
 bool Environment::rayIntersectsObstacle(Vector2D start, Vector2D end, Obstacle* obs)
@@ -242,6 +257,25 @@ Deposit* Environment::getClosestAvailableDeposit(const Vector2D& target)
 	return closestDeposit;
 }
 
+Food* Environment::getClosestAvailableFood(const Vector2D& target)
+{
+	double closestDistance = DBL_MAX;
+	Food* closestFood = nullptr;
+
+	for (auto food : _foods)
+	{
+		const double distance = Vector2D::distance(target, food->getPosition());
+
+		if (closestDistance > distance)
+		{
+			closestDistance = distance;
+			closestFood = food;
+		}
+	}
+
+	return closestFood;
+}
+
 void Environment::addDeposit(Deposit* deposit)
 {
 	_deposits.push_back(deposit);
@@ -282,4 +316,19 @@ Vehicle * Environment::getClosestVehicle(Vehicle * vehicle)
 	}
 
 	return closestVehicle;
+}
+
+void Environment::addStockpile(Stockpile* stockpile)
+{
+	_stockpile = stockpile;
+}
+
+Stockpile* Environment::getStockpile()
+{
+	return _stockpile;
+}
+
+void Environment::addFood(Food* food)
+{
+	_foods.push_back(food);
 }

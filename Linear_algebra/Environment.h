@@ -8,6 +8,8 @@
 #include "Graph.h"
 #include "AStarGraphSearch.h"
 #include "Deposit.h"
+#include "Stockpile.h"
+#include "Food.h"
 
 class Vehicle;
 
@@ -23,6 +25,8 @@ private:
 	std::vector<Wall*>			_walls;
 	std::vector<Vehicle*>		_vehicles;
 	std::vector<Deposit*>		_deposits;
+	std::vector<Food*>			_foods;
+	Stockpile*					_stockpile;
 	AStarGraphSearch*			_graphSearch;
 	Graph*					_graph;
 	
@@ -47,11 +51,15 @@ public:
 	const std::vector<Obstacle*>& getObstacles() const;
 	void addWall(Wall* wall);
 	Deposit* getClosestAvailableDeposit(const Vector2D& target);
+	Food* getClosestAvailableFood(const Vector2D& target);
 	void addDeposit(Deposit* deposit);
 	const std::vector<Wall*>& getWalls() const;
 	void toggleGraphRendering();
 	Graph* getGraph() const;
 	Vehicle* getClosestVehicle(Vehicle* vehicle);
+	void addStockpile(Stockpile* stockpile);
+	Stockpile* getStockpile();
+	void addFood(Food* food);
 };
 
 

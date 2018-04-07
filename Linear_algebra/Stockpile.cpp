@@ -1,9 +1,8 @@
-#include "Deposit.h"
+#include "Stockpile.h"
 #include <iostream>
 
 
-Deposit::Deposit(int gold) :
-	_gold(gold)
+Stockpile::Stockpile()
 {
 	_red = 0;
 	_green = 0;
@@ -12,32 +11,17 @@ Deposit::Deposit(int gold) :
 }
 
 
-Deposit::~Deposit()
+Stockpile::~Stockpile()
+= default;
+
+void Stockpile::addGold(float gold)
 {
+	_gold += gold;
+
+	std::cout << "Stockpile gold: " << _gold << std::endl;
 }
 
-float Deposit::take(float amount)
-{
-	_gold -= amount;
-	
-	if(_gold < 0)
-	{
-		float overflow = _gold;
-		_gold = 0;
-		return overflow + amount;
-	}
-
-	std::cout << "Deposit gold: " << _gold << std::endl;
-
-	return amount;
-}
-
-bool Deposit::empty() const
-{
-	return _gold <= 0;
-}
-
-void Deposit::render(SDL_Renderer* gRenderer)
+void Stockpile::render(SDL_Renderer* gRenderer)
 {
 	SDL_SetRenderDrawColor(gRenderer,
 		_red, _green, _blue, _alpha);
