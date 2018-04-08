@@ -5,8 +5,7 @@ GoalMineGold::GoalMineGold(VehicleGoalBehavior* vehicle) :
 {}
 
 GoalMineGold::~GoalMineGold()
-{
-}
+= default;
 
 void GoalMineGold::activate()
 {

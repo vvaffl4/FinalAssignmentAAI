@@ -114,4 +114,7 @@
     <ClInclude Include="GoalGetFood.h" />
     <ClInclude Include="GoalTakeFood.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ Environment::Environment()
 	_stockpile = nullptr;
 	_graph = nullptr;
 	_graphSearch = nullptr;
+	_path = nullptr;
 }
 
 
@@ -29,17 +30,20 @@ void Environment::generateGraph()
 	_graph->generateGraph();
 }
 
-Path* Environment::findPath(const Vector2D& start, const Vector2D& end)
+Path* Environment::findPath(const Vector2D& start, const Vector2D& end, Path::smoothingMethod smoothingMethod)
 {
-	Path* path = nullptr;
 	if (_graph != nullptr)
 	{
 		delete _graphSearch;
 
 		_graphSearch = new AStarGraphSearch();
-		path = _graph->findPath(start, end, _graphSearch);
+		Path* roughPath = _graph->findPath(start, end, _graphSearch);
+		_path = roughPath->smoothPath(smoothingMethod);
+		_path->begin();
+
+		delete roughPath;
 	}
-	return path;
+	return _path;
 }
 
 
@@ -61,6 +65,14 @@ void Environment::render(SDL_Renderer* gRenderer, double delta)
 				edge.second->setColor(220, 220, 255, 255);
 				edge.second->render(gRenderer);
 			}
+		}
+
+		/*
+		* Path
+		*/
+		if (_path != nullptr)
+		{
+			_path->render(gRenderer);
 		}
 	}
 

@@ -88,14 +88,8 @@ bool init()
 
 void close()
 {
-//	SDL_DestroyTexture(gTexture);
-//	gTexture = nullptr;
-
 	SDL_DestroyRenderer(gRenderer);
 	gRenderer = nullptr;
-
-//	SDL_FreeSurface(gScreenSurface);
-//	gScreenSurface = nullptr;
 
 	SDL_DestroyWindow(gWindow);
 	gWindow = nullptr;
@@ -108,16 +102,8 @@ void mouseRelease(SDL_MouseButtonEvent event)
 	targetX = event.x;
 	targetY = event.y;
 
-	Path* foundPath = environment->findPath(vehicleAlpha->getPosition(), Vector2D(targetX, targetY));
-
-	//	Path* roughPath = foundPath->smoothPath(Path::Precise);
-	precisePath = foundPath->smoothPath(Path::Rough);
-	precisePath->setRepeat(true);
-
-	delete foundPath;
-
-	precisePath->begin();
-	vehicleAlpha->getSteering()->setPathFollowingActive(precisePath, 1.0f);
+	Path* foundPath = environment->findPath(vehicleAlpha->getPosition(), Vector2D(targetX, targetY), Path::Rough);
+	vehicleAlpha->getSteering()->setPathFollowingActive(foundPath, 1.0f);
 }
 
 void quit()
@@ -241,21 +227,9 @@ int wmain(int argc, char* args[])
 
 	 /*////////////////////////
 	 * START SETUP GRAPH
-	 *////////////////////////
+	 */////////////////////////
 
-
-//	Graph* graph = environment->getGraph();
-
-//	AStarGraphSearch* search = new AStarGraphSearch();
-//	Path* errorPath = search->searchGraph(graph->getNodes()[0], graph->getNodes()[graph->getNodes().size() - 1]);
-//	errorPath = errorPath->smoothPath(Path::Precise);
-
-	Path* foundPath = environment->findPath(Vector2D(600, 550), Vector2D(200, 50));
-
-	precisePath = foundPath->smoothPath(Path::Precise);
-	precisePath->begin();
-
-	delete foundPath;
+	Path* precisePath = environment->findPath(Vector2D(600, 550), Vector2D(200, 50), Path::Rough);
 
 
    /*////////////////////////
@@ -298,6 +272,10 @@ int wmain(int argc, char* args[])
 //	vehicleExplore->getSteering()->setExploreUnactive();
 	environment->addVehicle(vehicleExplore);
 
+	/*////////////////////////
+	* GOAL DRIVEN VEHICLE
+	*/////////////////////////
+
 	Vehicle* vehicleGoal = new VehicleGoalBehavior(environment, gRenderer);
 	vehicleGoal->setColor(200, 0, 200, 255);
 	vehicleGoal->setPosition(Vector2D(400, 100));
@@ -320,7 +298,6 @@ int wmain(int argc, char* args[])
 		smallVehicle->getSteering()->setWallAvoidanceActive(50.0f);
 		smallVehicle->getSteering()->setEvadeActive(vehicle, 5.0f);
 		smallVehicle->getSteering()->setWanderActive(2.0f);
-//		smallVehicle->getSteering()->setHideActive(vehicle, 1.0f);
 		smallVehicle->getSteering()->setSeperationActive(50.0f);
 		smallVehicle->getSteering()->setAlignmentActive(0.4f);
 		smallVehicle->getSteering()->setCohesionActive(0.4f);
@@ -378,22 +355,10 @@ int wmain(int argc, char* args[])
 
 		environment->render(gRenderer, delta);
 
-//
-//		/*
-//		 * Draw Graph
-//		 */
-//		graph->render(gRenderer);
-
-		/*
-		 * Draw predefined path
-		 */
-//		path.render(gRenderer);
-
 		/*
 		 * Draw found path
 		 */
 //		foundPath->render(gRenderer);
-		//precisePath->render(gRenderer);
 //		errorPath->render(gRenderer);
 //		roughPath->render(gRenderer);
 

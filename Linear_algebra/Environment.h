@@ -28,7 +28,8 @@ private:
 	std::vector<Food*>			_foods;
 	Stockpile*					_stockpile;
 	AStarGraphSearch*			_graphSearch;
-	Graph*					_graph;
+	Graph*						_graph;
+	Path*						_path;
 	
 	bool _graphRender = false;
 
@@ -38,7 +39,7 @@ public:
 	static Environment* GetInstance();
 	~Environment();
 	void generateGraph();
-	Path* findPath(const Vector2D& start, const Vector2D& end);
+	Path* findPath(const Vector2D& start, const Vector2D& end, Path::smoothingMethod smoothingMethod);
 	void render(SDL_Renderer* gRenderer, double delta);
 	bool rayIntersectsObstacle(Vector2D start, Vector2D end, Obstacle* obs);
 	bool isPathObstructed(Vector2D start, Vector2D end);
