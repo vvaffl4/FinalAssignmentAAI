@@ -2,7 +2,7 @@
 #define GOAL_H
 #pragma once
 
-#include "Telegram.h"
+// #include "Telegram.h"
 
 class VehicleGoalBehavior;
 
@@ -23,7 +23,7 @@ public:
 	virtual void activate();
 	virtual int process() = 0;
 	virtual void terminate() = 0;
-	bool handleMessages(Telegram& telegram) const;
+	// bool handleMessages(Telegram& telegram) const;
 	bool isActive() const;
 	bool isUnactive() const;
 	bool isComplete() const;

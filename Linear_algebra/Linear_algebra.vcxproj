@@ -71,12 +71,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\User\Documents\Visual Studio 2017\Libraries\Includes;$(IncludePath);C:\Libraries\include;C:\Users\pw\Documents\Visual Studio 2017\Libraries\include</IncludePath>
-    <LibraryPath>D:\User\Documents\Visual Studio 2017\Libraries\Libs;$(LibraryPath);C:\Libraries\lib\x86;C:\Users\pw\Documents\Visual Studio 2017\Libraries\lib</LibraryPath>
+    <IncludePath>$(IncludePath);$(SolutionDir)libraries\include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)libraries\libs</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\User\Documents\Visual Studio 2017\Libraries\Includes;$(IncludePath)</IncludePath>
     <LibraryPath>D:\User\Documents\Visual Studio 2017\Libraries\Libs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(WindowsSDK_IncludePath);$(IncludePath);$(SolutionDir)libraries\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(SolutionDir)libraries\libs</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -112,6 +116,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,7 +136,6 @@
   <ItemGroup>
     <ClCompile Include="AStarGraphSearch.cpp" />
     <ClCompile Include="AtomicGoal.cpp" />
-    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="BaseEntity.cpp" />
     <ClCompile Include="CompositeGoal.cpp" />
     <ClCompile Include="Deposit.cpp" />
@@ -163,21 +167,15 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphSearch.cpp" />
     <ClCompile Include="GraphSearchHeuristic.cpp" />
-    <ClCompile Include="Hide.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Obstacle.cpp" />
-    <ClCompile Include="Guard.cpp" />
     <ClCompile Include="OneSidedEdge.cpp" />
     <ClCompile Include="Path.cpp" />
-    <ClCompile Include="Patrol.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="SteeringBehaviorGroup.cpp" />
     <ClCompile Include="Stockpile.cpp" />
-    <ClCompile Include="Telegram.cpp" />
     <ClCompile Include="TwoSidedEdge.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vector3D.cpp" />
@@ -188,7 +186,6 @@
   <ItemGroup>
     <ClInclude Include="AStarGraphSearch.h" />
     <ClInclude Include="AtomicGoal.h" />
-    <ClInclude Include="Attack.h" />
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="CompositeGoal.h" />
     <ClInclude Include="Deposit.h" />
@@ -220,20 +217,14 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphSearch.h" />
     <ClInclude Include="GraphSearchHeuristic.h" />
-    <ClInclude Include="Hide.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Obstacle.h" />
-    <ClInclude Include="Guard.h" />
     <ClInclude Include="OneSidedEdge.h" />
     <ClInclude Include="Path.h" />
-    <ClInclude Include="Patrol.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="SteeringBehaviorGroup.h" />
     <ClInclude Include="Stockpile.h" />
-    <ClInclude Include="Telegram.h" />
     <ClInclude Include="TwoSidedEdge.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2D.h" />
@@ -241,9 +232,6 @@
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="VehicleGoalBehavior.h" />
     <ClInclude Include="Wall.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

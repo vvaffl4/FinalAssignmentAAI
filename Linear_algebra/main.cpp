@@ -1,19 +1,13 @@
 #include <stdlib.h>     /* srand, rand */
 #include <iostream>
 
-#include "Matrix.h"
-
 #include "SDL.h"
 #include "SDL_video.h"
 #include <SDL_render.h>
 #include "Vehicle.h"
 #include "FuzzyLogicVehicle.h"
-#include "Guard.h"
 #include "Path.h"
-#include "Graph.h"
-#include "TwoSidedEdge.h"
 #include "DepthFirstGraphSearch.h"
-#include "AStarGraphSearch.h"
 #include "VehicleGoalBehavior.h"
 #include "Stockpile.h"
 #include "Food.h"
@@ -22,9 +16,7 @@ int SCREEN_WIDTH = 800;
 int SCREEN_HEIGHT = 600;
 
 SDL_Window* gWindow = nullptr;
-//SDL_Surface* gScreenSurface = nullptr;
 SDL_Renderer* gRenderer = nullptr;
-//SDL_Texture* gTexture = nullptr;
 
 Environment* environment;
 Vehicle* vehicle;
@@ -129,9 +121,6 @@ int wmain(int argc, char* args[])
 	if( !init())
 		std::cout << "Failed to initialize" << std::endl;
 
-	Guard guard = Guard();
-
-
 	/*////////////////////////
 	* START SETUP ENVIRONMENT
 	*////////////////////////
@@ -230,7 +219,6 @@ int wmain(int argc, char* args[])
 	 */////////////////////////
 
 	Path* precisePath = environment->findPath(Vector2D(600, 550), Vector2D(200, 50), Path::Rough);
-
 
    /*////////////////////////
 	* START SETUP VEHICLES
@@ -334,8 +322,6 @@ int wmain(int argc, char* args[])
 			delta = now - last;
 			last = now;
 		}
-
-		guard.update(delta);
 
 		while(SDL_PollEvent(&gEvent) != 0)
 		{

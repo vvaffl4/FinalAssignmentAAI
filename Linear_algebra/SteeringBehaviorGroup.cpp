@@ -289,9 +289,6 @@ Vector2D SteeringBehaviorGroup::obstacleAvoidance(const std::vector<Obstacle*>& 
 		(_vehicle->getVelocity().magnitude() / _vehicle->getMaximumSpeed()) *
 		_boxMinLength;
 
-//	std::cout << _boxLength << std::endl;
-	//tag all obstances within range
-
 	BaseEntity* closestIntersectingObstacle = nullptr;
 	Vector2D localPositionOfClosestObstacle;
 	double distanceToClosestIntersectingObstacle = DBL_MAX;
@@ -302,7 +299,7 @@ Vector2D SteeringBehaviorGroup::obstacleAvoidance(const std::vector<Obstacle*>& 
 			(*currentObject)->getPosition(),
 			_vehicle->getHeading(),
 			_vehicle->getSide(),
-			_vehicle->getPosition());//todo: POINT TO LOCAL SPACE
+			_vehicle->getPosition());
 
 		if(localPosition.x >= 0)
 		{

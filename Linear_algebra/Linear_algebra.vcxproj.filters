@@ -1,120 +1,316 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AStarGraphSearch.cpp" />
-    <ClCompile Include="Attack.cpp" />
-    <ClCompile Include="BaseEntity.cpp" />
-    <ClCompile Include="DepthFirstGraphSearch.cpp" />
-    <ClCompile Include="Edge.cpp" />
-    <ClCompile Include="Environment.cpp" />
-    <ClCompile Include="FuzzyLogic.cpp" />
-    <ClCompile Include="FuzzyModule.cpp" />
-    <ClCompile Include="FuzzyOperators.cpp" />
-    <ClCompile Include="FuzzyRule.cpp" />
-    <ClCompile Include="FuzzySet.cpp" />
-    <ClCompile Include="FuzzySet_LeftShoulder.cpp" />
-    <ClCompile Include="FuzzySet_RightShoulder.cpp" />
-    <ClCompile Include="FuzzySet_Singleton.cpp" />
-    <ClCompile Include="FuzzySet_Triangle.cpp" />
-    <ClCompile Include="FuzzyTerm.cpp" />
-    <ClCompile Include="FuzzyVariable.cpp" />
-    <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="GraphSearch.cpp" />
-    <ClCompile Include="GraphSearchHeuristic.cpp" />
-    <ClCompile Include="Hide.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix.cpp" />
-    <ClCompile Include="MovingEntity.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Obstacle.cpp" />
-    <ClCompile Include="Guard.cpp" />
-    <ClCompile Include="OneSidedEdge.cpp" />
-    <ClCompile Include="Path.cpp" />
-    <ClCompile Include="Patrol.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
-    <ClCompile Include="SteeringBehaviorGroup.cpp" />
-    <ClCompile Include="TwoSidedEdge.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
-    <ClCompile Include="Vector3D.cpp" />
-    <ClCompile Include="Vehicle.cpp" />
-    <ClCompile Include="Wall.cpp" />
-    <ClCompile Include="Goal.cpp" />
-    <ClCompile Include="CompositeGoal.cpp" />
-    <ClCompile Include="Telegram.cpp" />
-    <ClCompile Include="AtomicGoal.cpp" />
-    <ClCompile Include="FuzzyLogicVehicle.cpp" />
-    <ClCompile Include="Deposit.cpp" />
-    <ClCompile Include="GoalWander.cpp" />
-    <ClCompile Include="VehicleGoalBehavior.cpp" />
-    <ClCompile Include="GoalThink.cpp" />
-    <ClCompile Include="GoalGetGold.cpp" />
-    <ClCompile Include="GoalArrive.cpp" />
-    <ClCompile Include="Stockpile.cpp" />
-    <ClCompile Include="GoalMineGold.cpp" />
-    <ClCompile Include="GoalStockpileGold.cpp" />
-    <ClCompile Include="Food.cpp" />
-    <ClCompile Include="GoalGetFood.cpp" />
-    <ClCompile Include="GoalTakeFood.cpp" />
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="VehicleGoalBehavior.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviorGroup.cpp">
+      <Filter>SteeringBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzyLogic.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzyLogicVehicle.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzyModule.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzyOperators.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzyRule.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzySet.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzySet_LeftShoulder.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzySet_RightShoulder.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzySet_Singleton.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzySet_Triangle.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzyTerm.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="FuzzyVariable.cpp">
+      <Filter>FuzzyLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Edge.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphSearch.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphSearchHeuristic.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Common\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEntity.cpp">
+      <Filter>Common\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Common\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3D.cpp">
+      <Filter>Common\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>Common\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Environment.cpp">
+      <Filter>Common\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Deposit.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="CompositeGoal.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="AtomicGoal.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Food.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Goal.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalArrive.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalGetFood.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalGetGold.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalMineGold.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalStockpileGold.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalTakeFood.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalThink.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalWander.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarGraphSearch.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="DepthFirstGraphSearch.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingEntity.cpp">
+      <Filter>Common\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Common\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="OneSidedEdge.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
+    <ClCompile Include="Stockpile.cpp">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="TwoSidedEdge.cpp">
+      <Filter>PathPlanning</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AStarGraphSearch.h" />
-    <ClInclude Include="Attack.h" />
-    <ClInclude Include="BaseEntity.h" />
-    <ClInclude Include="DepthFirstGraphSearch.h" />
-    <ClInclude Include="Edge.h" />
-    <ClInclude Include="Environment.h" />
-    <ClInclude Include="FuzzyModule.h" />
-    <ClInclude Include="FuzzyOperators.h" />
-    <ClInclude Include="FuzzyRule.h" />
-    <ClInclude Include="FuzzySet.h" />
-    <ClInclude Include="FuzzySet_LeftShoulder.h" />
-    <ClInclude Include="FuzzySet_RightShoulder.h" />
-    <ClInclude Include="FuzzySet_Singleton.h" />
-    <ClInclude Include="FuzzySet_Triangle.h" />
-    <ClInclude Include="FuzzyTerm.h" />
-    <ClInclude Include="FuzzyVariable.h" />
-    <ClInclude Include="FzSet.h" />
-    <ClInclude Include="Graph.h" />
-    <ClInclude Include="GraphSearch.h" />
-    <ClInclude Include="GraphSearchHeuristic.h" />
-    <ClInclude Include="Hide.h" />
-    <ClInclude Include="Matrix.h" />
-    <ClInclude Include="MovingEntity.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="Obstacle.h" />
-    <ClInclude Include="Guard.h" />
-    <ClInclude Include="OneSidedEdge.h" />
-    <ClInclude Include="Path.h" />
-    <ClInclude Include="Patrol.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMachine.h" />
-    <ClInclude Include="SteeringBehaviorGroup.h" />
-    <ClInclude Include="TwoSidedEdge.h" />
-    <ClInclude Include="utils.h" />
-    <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="Vector3D.h" />
-    <ClInclude Include="Vehicle.h" />
-    <ClInclude Include="Wall.h" />
-    <ClInclude Include="Goal.h" />
-    <ClInclude Include="CompositeGoal.h" />
-    <ClInclude Include="Telegram.h" />
-    <ClInclude Include="AtomicGoal.h" />
-    <ClInclude Include="FuzzyLogicVehicle.h" />
-    <ClInclude Include="Deposit.h" />
-    <ClInclude Include="GoalWander.h" />
-    <ClInclude Include="VehicleGoalBehavior.h" />
-    <ClInclude Include="GoalThink.h" />
-    <ClInclude Include="GoalGetGold.h" />
-    <ClInclude Include="GoalArrive.h" />
-    <ClInclude Include="Stockpile.h" />
-    <ClInclude Include="GoalMineGold.h" />
-    <ClInclude Include="GoalStockpileGold.h" />
-    <ClInclude Include="Food.h" />
-    <ClInclude Include="GoalGetFood.h" />
-    <ClInclude Include="GoalTakeFood.h" />
+    <ClInclude Include="Vehicle.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="VehicleGoalBehavior.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviorGroup.h">
+      <Filter>SteeringBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzyLogicVehicle.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzyModule.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzyOperators.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzyRule.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzySet.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzySet_LeftShoulder.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzySet_RightShoulder.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzySet_Singleton.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzySet_Triangle.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzyTerm.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FuzzyVariable.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="FzSet.h">
+      <Filter>FuzzyLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphSearch.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphSearchHeuristic.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Common\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntity.h">
+      <Filter>Common\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.h">
+      <Filter>Common\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Deposit.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="CompositeGoal.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="AtomicGoal.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Food.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Goal.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalArrive.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalGetFood.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalGetGold.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalStockpileGold.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalMineGold.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalTakeFood.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalThink.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalWander.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarGraphSearch.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthFirstGraphSearch.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingEntity.h">
+      <Filter>Common\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
+      <Filter>Common\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="OneSidedEdge.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Common\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Stockpile.h">
+      <Filter>GoalDrivenBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoSidedEdge.h">
+      <Filter>PathPlanning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <Filter Include="SteeringBehavior">
+      <UniqueIdentifier>{192e1ab9-4edc-4951-93f2-a07b31083dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FuzzyLogic">
+      <UniqueIdentifier>{2712960b-0f0c-4986-9f76-7677eef6b8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PathPlanning">
+      <UniqueIdentifier>{9b3cbd57-1178-43dc-b07e-4c3ca7b0b372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{c7224e98-d672-4a32-8edd-2d496517a8c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Environment">
+      <UniqueIdentifier>{6f28469c-14b4-43cd-b28d-9933abfb08d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Math">
+      <UniqueIdentifier>{6717af3c-d155-41c0-9da1-72986944f822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GoalDrivenBehavior">
+      <UniqueIdentifier>{42f4dd68-e9da-42d2-9ed0-a4353754e2cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

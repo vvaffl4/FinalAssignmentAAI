@@ -10,10 +10,10 @@ Goal::Goal(VehicleGoalBehavior* vehicle) :
 Goal::~Goal()
 = default;
 
-bool Goal::handleMessages(Telegram& telegram) const
-{
-	return true;
-}
+// bool Goal::handleMessages(Telegram& telegram) const
+// {
+// 	return true;
+// }
 
 void Goal::activate()
 {
